@@ -1,0 +1,15 @@
+name: LCC
+version: 1.0-SNAPSHOT
+main: lcc.lusocraftchampionship.Lusocraftchampionship
+authors: [ Smili, MiniGahmer ]
+description: LCC Plugin
+depend: [ ProtocolLib ]
+api-version: '1.20'
+
+commands:
+  startgravitywars:
+  startwildwestbounty:
+  startlcc:
+  stoplcc:
+  reloadlcc:
+  togglegravity:
