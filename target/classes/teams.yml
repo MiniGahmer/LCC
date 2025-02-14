@@ -1,0 +1,13 @@
+team_max_players: 4
+teams:
+  Blaze:
+    players:
+      - Min1Gahmer
+    icon: 'Ⓒ'
+    prefix: 'Ⓔ§6 '
+    color: ORANGE
+    chatcolor: LIGHT_PURPLE
+    block: ORANGE
+    points: 0
+    spacement: "\uF82A\uF82A\uF829\uF801"
+    totem: 0

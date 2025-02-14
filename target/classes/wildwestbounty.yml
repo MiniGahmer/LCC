@@ -1,0 +1,78 @@
+spawnpoint:
+  x:
+  y:
+  z:
+  world: wildwestbounty
+area:
+  edge:
+    x:
+    y:
+    z:
+    world: wildwestbounty
+  edge1:
+    x:
+    y:
+    z:
+    world: wildwestbounty
+map:
+  edge:
+    x:
+    y:
+    z:
+    world: wildwestbounty
+  edge1:
+    x:
+    y:
+    z:
+    world: wildwestbounty
+teamspawn:
+  '1':
+    x:
+    y:
+    z:
+    world: wildwestbounty
+  '2':
+    x:
+    y:
+    z:
+    world: wildwestbounty
+  '3':
+    x:
+    y:
+    z:
+    world: wildwestbounty
+  '4':
+    x:
+    y:
+    z:
+    world: wildwestbounty
+red:
+  '1':
+    '1':
+      x:
+      y:
+      z:
+      world: wildwestbounty
+    '2':
+      x:
+      y:
+      z:
+      world: wildwestbounty
+    '3':
+      x:
+      y:
+      z:
+      world: wildwestbounty
+    '4':
+      x:
+      y:
+      z:
+      world: wildwestbounty
+team1:
+  - Blaze
+team2:
+  - Creeper
+team3:
+  - Skeleton
+team4:
+  - Enderman

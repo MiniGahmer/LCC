@@ -1,0 +1,34 @@
+spawnpoint:
+  x: -1994
+  y: 129
+  z: -1954
+  world: gravitywars
+teamspawn:
+  '1':
+    x: -2003.5
+    y: 117
+    z: -1985.5
+    world: gravitywars
+  '2':
+    x: -2003.5
+    y: 117
+    z: -1917.5
+    world: gravitywars
+  '3':
+    x: -2041.5
+    y: 117
+    z: -1948.5
+    world: gravitywars
+  '4':
+    x: -1966.5
+    y: 117
+    z: -1948.5
+    world: gravitywars
+team:
+  Blaze
+team1:
+  Creeper
+team3:
+  Enderman
+team4:
+  Zombie
