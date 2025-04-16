@@ -30,8 +30,8 @@ public class PlayerRespawnListener implements Listener {
 
     @EventHandler
     public void onPlayerHitByPlayer(EntityDamageByEntityEvent event) {
-        Player player = (Player) event.getEntity();
         if (!(event.getEntity() instanceof Player)) return;
+        Player player = (Player) event.getEntity();
         if (!player.getLocation().getWorld().getName().equals(gravityWars.getWorldName())) return;
 
         if (event.getCause().equals(EntityDamageEvent.DamageCause.FALL)){
@@ -78,6 +78,7 @@ public class PlayerRespawnListener implements Listener {
         if (!(event.getEntity() instanceof Player)) return;
         if (event.getCause().equals(EntityDamageEvent.DamageCause.FALL)){
             event.setCancelled(true);
+            return;
         }
         if (!event.getEntity().getLocation().getWorld().getName().equals(gravityWars.getWorldName())) return;
 

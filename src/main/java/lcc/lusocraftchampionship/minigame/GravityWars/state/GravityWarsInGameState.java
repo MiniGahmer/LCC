@@ -59,7 +59,6 @@ public class GravityWarsInGameState extends MinigameStages {
                 player.setInvulnerable(false);
             }
         }
-
     }
 
     @Override

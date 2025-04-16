@@ -4,7 +4,7 @@ teams:
     players:
       - Min1Gahmer
     icon: 'Ⓒ'
-    prefix: 'Ⓔ§6 '
+    prefix: '§6 '
     color: ORANGE
     chatcolor: LIGHT_PURPLE
     block: ORANGE
