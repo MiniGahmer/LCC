@@ -19,7 +19,7 @@ public class ReloadLCC implements CommandExecutor {
         if (player.hasPermission("reloadlcc.use")) {
           player.sendMessage(ChatColor.GREEN + "Reload started");
 
-          LCCPlugin.getPlugin().manager.reload();
+//          LCCPlugin.getPlugin().manager.reload();
           Teams.INSTANCE.reload();
 
           for (Player p : Bukkit.getOnlinePlayers()) {

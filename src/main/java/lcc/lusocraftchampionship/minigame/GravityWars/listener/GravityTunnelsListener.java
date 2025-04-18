@@ -1,3 +1,4 @@
+/*
 package lcc.lusocraftchampionship.minigame.GravityWars.listener;
 
 import lcc.lusocraftchampionship.minigame.GravityWars.GravityWars;
@@ -103,4 +104,4 @@ public class GravityTunnelsListener implements Listener {
             }.runTaskTimer(gravityWars.plugin, 0, 40); // Runs every 40 ticks (2 seconds)
         }
     }
-}
+}*/

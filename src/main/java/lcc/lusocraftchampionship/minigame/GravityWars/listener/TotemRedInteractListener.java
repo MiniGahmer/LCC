@@ -1,3 +1,4 @@
+/*
 package lcc.lusocraftchampionship.minigame.GravityWars.listener;
 
 import com.comphenix.protocol.wrappers.Pair;
@@ -190,3 +191,4 @@ public class TotemRedInteractListener implements Listener {
 
 
 }
+*/

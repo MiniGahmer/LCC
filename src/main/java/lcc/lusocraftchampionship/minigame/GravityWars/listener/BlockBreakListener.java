@@ -1,3 +1,4 @@
+/*
 package lcc.lusocraftchampionship.minigame.GravityWars.listener;
 
 import lcc.lusocraftchampionship.lcc.team.Teams;
@@ -64,3 +65,4 @@ public class BlockBreakListener implements Listener {
     }
 
 }
+*/

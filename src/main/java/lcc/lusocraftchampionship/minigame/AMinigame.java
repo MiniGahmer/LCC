@@ -224,7 +224,7 @@ public abstract class AMinigame implements IMinigame {
 
   private IStage createInstance(Class<? extends IStage> clazz) {
     try {
-      return clazz.getDeclaredConstructor(this.getClass()).newInstance();
+      return clazz.getDeclaredConstructor(this.getClass()).newInstance(this);
     } catch (Exception e) {
       throw new RuntimeException("Failed to create instance of " + clazz.getName(), e);
     }

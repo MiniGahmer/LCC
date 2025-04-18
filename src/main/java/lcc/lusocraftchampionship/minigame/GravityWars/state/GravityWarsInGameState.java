@@ -23,7 +23,7 @@ public class GravityWarsInGameState extends AStage<GravityWars, GravityWarsStage
     // TODO Auto-generated constructor stub
   }
 
-  @Override
+  /*@Override
   public void onEnable() {
     for (VirtualPlayer vp : minigame.players) {
       if (minigame.getTeam1().contains(Teams.INSTANCE.getPlayerTeam(player))) {
@@ -104,6 +104,6 @@ public class GravityWarsInGameState extends AStage<GravityWars, GravityWarsStage
   @Override
   public int stageTime() {
     return Timer.minToTicks(60);
-  }
+  }*/
 
 }

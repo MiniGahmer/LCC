@@ -1,3 +1,4 @@
+/*
 package lcc.lusocraftchampionship.minigame.GravityWars.listener;
 
 import lcc.lusocraftchampionship.minigame.GravityWars.GravityWars;
@@ -43,3 +44,4 @@ public class PlayerInventoryClickListener implements Listener {
         }
     }
 }
+*/

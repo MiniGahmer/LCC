@@ -16,7 +16,7 @@ public class GravityWarsEndState extends AStage<GravityWars, GravityWarsStages> 
     super(minigame);
   }
 
-  @Override
+  /*@Override
   public void onUpdate(int ticks, int stopwatch) {
     for (VirtualPlayer player : minigame.players) {
       playerImmune(player);
@@ -41,6 +41,6 @@ public class GravityWarsEndState extends AStage<GravityWars, GravityWarsStages> 
   @Override
   public int stageTime() {
     return Timer.secToTicks(45);
-  }
+  }*/
 
 }

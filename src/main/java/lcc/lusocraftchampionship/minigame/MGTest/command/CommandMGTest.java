@@ -11,7 +11,7 @@ public class CommandMGTest implements CommandExecutor {
   public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
     if (sender.hasPermission("lcc.mgtest")) {
       if (args.length == 0) {
-        MGTest mgTest = new MGTest("MGTest", true);
+        MGTest mgTest = new MGTest("mgtest", true);
         mgTest.start();
         return true;
       } else {

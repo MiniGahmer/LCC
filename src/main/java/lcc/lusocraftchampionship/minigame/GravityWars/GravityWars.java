@@ -71,24 +71,23 @@ public class GravityWars extends AMinigame {
     MapareaEdge = getMapEdge();
     MapareaEdge1 = getMapEdge1();
 
-    addState(GravityWarsStages.TELEPORT, GravityWarsTeleportState.class);
     addState(GravityWarsStages.EXPLANATION, GravityWarsExplanationState.class);
     addState(GravityWarsStages.PREPARATION, GravityWarsPreparationState.class);
     addState(GravityWarsStages.INGAME, GravityWarsInGameState.class);
     addState(GravityWarsStages.END, GravityWarsEndState.class);
 
-    addClassListener(BlockBreakListener.class);
-    addClassListener(BlockBreakListener.class);
-    addClassListener(BlockPlaceListener.class);
-    addClassListener(PlayerRespawnListener.class);
-    addClassListener(EntityDamageByEntityListener.class);
-    addClassListener(GravityTunnelsListener.class);
-    addClassListener(GravityDeviceListener.class);
-    addClassListener(TotemRedInteractListener.class);
-    addClassListener(TotemBlueInteractListener.class);
-    addClassListener(TotemGreenInteractListener.class);
-    addClassListener(TotemObsidianInteractListener.class);
-    addClassListener(PlayerInventoryClickListener.class);
+//    addClassListener(BlockBreakListener.class);
+//    addClassListener(BlockBreakListener.class);
+//    addClassListener(BlockPlaceListener.class);
+//    addClassListener(PlayerRespawnListener.class);
+//    addClassListener(EntityDamageByEntityListener.class);
+//    addClassListener(GravityTunnelsListener.class);
+//    addClassListener(GravityDeviceListener.class);
+//    addClassListener(TotemRedInteractListener.class);
+//    addClassListener(TotemBlueInteractListener.class);
+//    addClassListener(TotemGreenInteractListener.class);
+//    addClassListener(TotemObsidianInteractListener.class);
+//    addClassListener(PlayerInventoryClickListener.class);
 
     // setMinigameExplanation(new GravityWarsExplanation(this));
     // registerCommand("startgravitywars", new StartGravityWars(this));

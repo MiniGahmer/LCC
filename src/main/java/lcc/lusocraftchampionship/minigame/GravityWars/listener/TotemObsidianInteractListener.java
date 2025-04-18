@@ -1,3 +1,4 @@
+/*
 package lcc.lusocraftchampionship.minigame.GravityWars.listener;
 
 import lcc.lusocraftchampionship.lcc.team.Teams;
@@ -97,3 +98,4 @@ public class TotemObsidianInteractListener implements Listener {
         player.sendMessage(ChatColor.GOLD + "Roubas-te o Totem! Protege-o e coloca-o na tua base!!");
     }
 }
+*/

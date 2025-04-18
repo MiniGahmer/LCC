@@ -1,23 +1,17 @@
 package lcc.lusocraftchampionship.minigame.GravityWars.state;
 
-import lcc.lusocraftchampionship.lcc.player.VirtualPlayer;
-import lcc.lusocraftchampionship.lcc.team.Teams;
-import lcc.lusocraftchampionship.minigame.AMinigame;
 import lcc.lusocraftchampionship.minigame.AStage;
 import lcc.lusocraftchampionship.minigame.GravityWars.GravityWars;
 import lcc.lusocraftchampionship.minigame.GravityWars.GravityWarsStages;
-import lcc.lusocraftchampionship.util.Timer;
-import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
-import org.bukkit.entity.Player;
 
 public class GravityWarsPreparationState extends AStage<GravityWars, GravityWarsStages> {
 
-  protected GravityWarsPreparationState(GravityWars minigame) {
-    super(minigame);
-    // TODO Auto-generated constructor stub
-  }
-
+    protected GravityWarsPreparationState(GravityWars minigame) {
+        super(minigame);
+        // TODO Auto-generated constructor stub
+    }
+}
+/*
   @Override
   public void onEnable() {
     // Loop through each block and set its material
@@ -76,3 +70,4 @@ public class GravityWarsPreparationState extends AStage<GravityWars, GravityWars
     return Timer.secToTicks(10);
   }
 }
+*/

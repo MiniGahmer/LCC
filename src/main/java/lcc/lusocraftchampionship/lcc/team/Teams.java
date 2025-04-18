@@ -26,7 +26,7 @@ public enum Teams {
   }
 
   public void reload() {
-    data = new DataManager(plugin, "Teams.");
+    data = new DataManager(plugin, "teams");
     getData();
   }
 
@@ -37,24 +37,24 @@ public enum Teams {
 
     maxPlayers = data.getConfig().getInt("team_max_players");
 
-    file.getConfigurationSection("Teams.").getKeys(false).forEach(teamName -> {
+    file.getConfigurationSection("teams").getKeys(false).forEach(teamName -> {
       teams.add(new VirtualTeam(
           teamName,
-          (List<String>) file.getList("Teams." + teamName + ".players"),
-          file.getString("Teams." + teamName + ".icon"),
-          file.getString("Teams." + teamName + ".prefix"),
-          getColor(file.getString("Teams." + teamName + ".color")),
-          file.getInt("Teams." + teamName + ".points"),
-          file.getInt("Teams." + teamName + ".totem"),
-          getConcrete(file.getString("Teams." + teamName + ".block")),
-          getWool(file.getString("Teams." + teamName + ".block")),
-          getChatColor(file.getString("Teams." + teamName + ".chatcolor")), maxPlayers));
+          (List<String>) file.getList("teams." + teamName + ".players"),
+          file.getString("teams." + teamName + ".icon"),
+          file.getString("teams." + teamName + ".prefix"),
+          getColor(file.getString("teams." + teamName + ".color")),
+          file.getInt("teams." + teamName + ".points"),
+          file.getInt("teams." + teamName + ".totem"),
+          getConcrete(file.getString("teams." + teamName + ".block")),
+          getWool(file.getString("teams." + teamName + ".block")),
+          getChatColor(file.getString("teams." + teamName + ".chatcolor")), maxPlayers));
     });
   }
 
   public void saveData() {
-    data.getConfig().getConfigurationSection("Teams.").getKeys(false).forEach(teamName -> {
-      data.getConfig().set("Teams." + teamName + ".points", getTeam(teamName).get().getPoints());
+    data.getConfig().getConfigurationSection("teams").getKeys(false).forEach(teamName -> {
+      data.getConfig().set("teams." + teamName + ".points", getTeam(teamName).get().getPoints());
     });
     data.saveConfig();
   }
