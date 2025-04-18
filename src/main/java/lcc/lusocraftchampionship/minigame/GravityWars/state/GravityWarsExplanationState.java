@@ -1,51 +1,36 @@
 package lcc.lusocraftchampionship.minigame.GravityWars.state;
 
-import lcc.lusocraftchampionship.minigame.GravityWars.GravityWars;
-import lcc.lusocraftchampionship.minigame.AMinigame;
 import lcc.lusocraftchampionship.minigame.AStage;
+import lcc.lusocraftchampionship.minigame.GravityWars.GravityWars;
+import lcc.lusocraftchampionship.minigame.GravityWars.GravityWarsStages;
 
-public class GravityWarsExplanationState extends AStage {
+public class GravityWarsExplanationState extends AStage<GravityWars, GravityWarsStages> {
+    public GravityWarsExplanationState(GravityWars minigame) {
+        super(minigame);
+    }
 
     @Override
-    public void onEnable(AMinigame minigame) {
+    public void onEnable() {
+        // TODO Auto-generated method stub
 
     }
 
     @Override
-    public void onUpdate(int ticks, int stopwatch, AMinigame minigame, boolean isTesting, int minigameSize, float coinMultiplier) {
-        GravityWars gravityWars = (GravityWars) minigame;
+    public void onUpdate(int ticks, int stopwatch) {
+        // TODO Auto-generated method stub
 
-        goNextState();
-
-        //gravityWars.explanation(stopwatch);
-
-        //if (Timer.ticksToSec(stopwatch) <= 1) {
-            //sendTeamPlayerFlash();
-        //}
-
-        gravityWars.refreshAll(ticks, minigameSize, "§c§lExplicação", stopwatch, coinMultiplier);
     }
 
     @Override
-    public void onDisable(AMinigame minigame, boolean isTesting) {
-        GravityWars gravityWars = (GravityWars) minigame;
+    public void onDisable() {
+        // TODO Auto-generated method stub
 
-        //Location downedge = gravityWars.getParkourSpawn("downedge");
-        //Location upedge = gravityWars.getParkourSpawn("upedge");
-        //SpawnLocation spawnLocation = new SpawnLocation(downedge, upedge, downedge.getYaw(), downedge.getPitch());
-
-        //for (Player player : Bukkit.getOnlinePlayers()) {
-            //Location location = spawnLocation.randomSpawnLocationXZ();
-            //player.teleport(location);
-            //player.setBedSpawnLocation(location, true);
-            //player.setGameMode(GameMode.SURVIVAL);
-            //giveBoots(player);
-        //}
     }
 
     @Override
-    public int stateTime(AMinigame minigame) {
+    public int stageTime() {
         return 0;
     }
 
+   
 }

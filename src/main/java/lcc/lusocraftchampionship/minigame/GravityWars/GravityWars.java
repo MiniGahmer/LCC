@@ -1,11 +1,11 @@
 package lcc.lusocraftchampionship.minigame.GravityWars;
 
-import lcc.lusocraftchampionship.LCCPlugin;
+import lcc.lusocraftchampionship.lcc.player.VirtualPlayer;
 import lcc.lusocraftchampionship.lcc.team.Teams;
-import lcc.lusocraftchampionship.minigame.GravityWars.command.StartGravityWars;
 import lcc.lusocraftchampionship.minigame.GravityWars.listener.*;
 import lcc.lusocraftchampionship.minigame.GravityWars.state.*;
 import lcc.lusocraftchampionship.minigame.AMinigame;
+import lcc.lusocraftchampionship.minigame.IMinigameExplanation;
 import lcc.lusocraftchampionship.util.Timer;
 import org.bukkit.*;
 import org.bukkit.block.Block;
@@ -63,8 +63,8 @@ public class GravityWars extends AMinigame {
 
       ));
 
-  public GravityWars(LCCPlugin plugin) {
-    super("gravitywars");
+  public GravityWars(boolean isTesting) {
+    super("gravitywars", isTesting);
 
     RedareaEdge = getAreaEdge();
     RedareaEdge1 = getAreaEdge1();
@@ -90,58 +90,13 @@ public class GravityWars extends AMinigame {
     addClassListener(TotemObsidianInteractListener.class);
     addClassListener(PlayerInventoryClickListener.class);
 
-    setMinigameExplanation(new GravityWarsExplanation(this));
-    registerCommand("startgravitywars", new StartGravityWars(this));
+    // setMinigameExplanation(new GravityWarsExplanation(this));
+    // registerCommand("startgravitywars", new StartGravityWars(this));
   }
 
   @Override
   public String getWorldName() {
     return data.getConfig().getString("spawnpoint.world");
-  }
-
-  @Override
-  public void refreshPoints() {
-    super.refreshPoints();
-
-    TOP_PLAYERS_KILLS.clear();
-    for (int x = 0; x < 20; x++) {
-      String playerName = "";
-      int points = 0;
-      for (Map.Entry<String, Integer> entry : PLAYER_KILLS.entrySet()) {
-        String _playerName = entry.getKey();
-        Integer _points = entry.getValue();
-        if (!TOP_PLAYERS_KILLS.contains(_playerName)) {
-          if (_points >= points) {
-            points = _points;
-            playerName = _playerName;
-          }
-        }
-      }
-      TOP_PLAYERS_KILLS.add(playerName);
-    }
-  }
-
-  @Override
-  public void refreshScoreboard(int minigameSize, String gameState, int stopwatch, float coinMultiplier) {
-    if (Timer.isOneSec(stopwatch)) {
-      ArrayList<String> lines = new ArrayList<>();
-      lines.add("§b§lJogo " + (6 - minigameSize) + "/5: §rAce Race");
-      lines.add(gameState + "§c§l: §r" + Timer.formatMS(stopwatch));
-      lines.add("");
-      lines.add("§b§lOuro do jogo: §r(§e" + coinMultiplier + "x§r)");
-      lines.add(" 1. " + Teams.INSTANCE.getIconPrefix(TOP_TEAMS.get(0)) + TOP_TEAMS.get(0) + "§r > "
-          + TEAM_POINTS.get(TOP_TEAMS.get(0)) + Teams.INSTANCE.getScoreboardCoin());
-      lines.add(" 2. " + Teams.INSTANCE.getIconPrefix(TOP_TEAMS.get(1)) + TOP_TEAMS.get(1) + "§r > "
-          + TEAM_POINTS.get(TOP_TEAMS.get(1)) + Teams.INSTANCE.getScoreboardCoin());
-      lines.add(" 3. " + Teams.INSTANCE.getIconPrefix(TOP_TEAMS.get(2)) + TOP_TEAMS.get(2) + "§r > "
-          + TEAM_POINTS.get(TOP_TEAMS.get(2)) + Teams.INSTANCE.getScoreboardCoin());
-      lines.add(" 4. " + Teams.INSTANCE.getIconPrefix(TOP_TEAMS.get(3)) + TOP_TEAMS.get(3) + "§r > "
-          + TEAM_POINTS.get(TOP_TEAMS.get(3)) + Teams.INSTANCE.getScoreboardCoin());
-      lines.add(" 5. " + Teams.INSTANCE.getIconPrefix(TOP_TEAMS.get(4)) + TOP_TEAMS.get(4) + "§r > "
-          + TEAM_POINTS.get(TOP_TEAMS.get(4)) + Teams.INSTANCE.getScoreboardCoin());
-      lines.add("");
-      // PlayerScoreboard.changeAll(lines);
-    }
   }
 
   public Location getSpawnpoint() {
@@ -206,7 +161,8 @@ public class GravityWars extends AMinigame {
   }
 
   public boolean areTeammates(Player player1, Player player2) {
-    return Teams.INSTANCE.getPlayerTeam(player1).equals(Teams.INSTANCE.getPlayerTeam(player2)); // Adjust this based on your team system
+    return Teams.INSTANCE.getPlayerTeam(player1).equals(Teams.INSTANCE.getPlayerTeam(player2)); // Adjust this based on
+                                                                                                // your team system
   }
 
   public List<Location> getRedTotem() {
@@ -323,50 +279,50 @@ public class GravityWars extends AMinigame {
         data.getConfig().getDouble("map.edge1.z"));
   }
 
-  public void givePlayerKit(Player player) {
+  public void givePlayerKit(VirtualPlayer vp) {
     ItemStack itemStack = new ItemStack(Material.STONE_SWORD);
     ItemMeta itemMeta = itemStack.getItemMeta();
     itemMeta.setUnbreakable(true);
     itemStack.setItemMeta(itemMeta);
-    player.getInventory().addItem(itemStack);
+    vp.player.getInventory().addItem(itemStack);
 
-    itemStack = new ItemStack(Teams.INSTANCE.getTeamWool(Teams.INSTANCE.getPlayerTeam(player)), 64);
+    itemStack = new ItemStack(vp.team.wool, 64);
     itemMeta.setUnbreakable(true);
-    player.getInventory().addItem(itemStack);
+    vp.player.getInventory().addItem(itemStack);
 
     itemStack = new ItemStack(Material.SHEARS);
     itemMeta.setUnbreakable(true);
-    player.getInventory().addItem(itemStack);
+    vp.player.getInventory().addItem(itemStack);
 
     itemStack = new ItemStack(Material.LEATHER_LEGGINGS);
     ItemMeta meta = itemStack.hasItemMeta() ? itemStack.getItemMeta()
         : Bukkit.getItemFactory().getItemMeta(itemStack.getType());
     LeatherArmorMeta leatherArmorMeta = (LeatherArmorMeta) meta;
-    leatherArmorMeta.setColor(Teams.INSTANCE.getTeamColor(Teams.INSTANCE.getPlayerTeam(player)));
+    leatherArmorMeta.setColor(vp.team.color);
     itemStack.setItemMeta(leatherArmorMeta);
 
-    player.getInventory().setLeggings(itemStack);
+    vp.player.getInventory().setLeggings(itemStack);
 
     itemStack = new ItemStack(Material.LEATHER_CHESTPLATE);
     ItemMeta meta1 = itemStack.hasItemMeta() ? itemStack.getItemMeta()
         : Bukkit.getItemFactory().getItemMeta(itemStack.getType());
     LeatherArmorMeta leatherArmorMeta1 = (LeatherArmorMeta) meta1;
-    leatherArmorMeta1.setColor(Teams.INSTANCE.getTeamColor(Teams.INSTANCE.getPlayerTeam(player)));
+    leatherArmorMeta1.setColor(vp.team.color);
     itemStack.setItemMeta(leatherArmorMeta1);
 
-    player.getInventory().setChestplate(itemStack);
+    vp.player.getInventory().setChestplate(itemStack);
 
     itemStack = new ItemStack(Material.LEATHER_BOOTS);
     ItemMeta meta2 = itemStack.hasItemMeta() ? itemStack.getItemMeta()
         : Bukkit.getItemFactory().getItemMeta(itemStack.getType());
     LeatherArmorMeta leatherArmorMeta2 = (LeatherArmorMeta) meta2;
-    leatherArmorMeta2.setColor(Teams.INSTANCE.getTeamColor(Teams.INSTANCE.getPlayerTeam(player)));
+    leatherArmorMeta2.setColor(vp.team.color);
     itemStack.setItemMeta(leatherArmorMeta2);
 
-    player.getInventory().setBoots(itemStack);
+    vp.player.getInventory().setBoots(itemStack);
   }
 
-  public Block[] StartingBlocks = {
+  public Block[] startingBlocks = {
       getRedTotem().getFirst().getBlock(),
       getBlueTotem().get(1).getBlock(),
       getGreenTotem().get(2).getBlock(),
@@ -478,5 +434,10 @@ public class GravityWars extends AMinigame {
     }
 
     return blackHoleLocation.clone().add(0, 3, 0); // As a last resort, teleport above the black hole
+  }
+
+  @Override
+  public IMinigameExplanation getMinigameExplanation(IMinigameExplanation minigameExplanation) {
+    return new GravityWarsExplanation(this);
   }
 }

@@ -1,6 +1,6 @@
-package lcc.lusocraftchampionship.minigame.GravityWars.state;
+package lcc.lusocraftchampionship.minigame.minigame.state;
 
-import lcc.lusocraftchampionship.minigame.GravityWars.GravityWars;
+import lcc.lusocraftchampionship.minigame.minigame.minigame;
 import lcc.lusocraftchampionship.lcc.team.Teams;
 import lcc.lusocraftchampionship.minigame.AMinigame;
 import lcc.lusocraftchampionship.minigame.AStage;
@@ -12,32 +12,32 @@ public class GravityWarsTeleportState extends AStage {
 
     @Override
     public void onEnable(AMinigame minigame) {
-        GravityWars gravityWars = (GravityWars) minigame;
+        minigame minigame = (minigame) minigame;
 
-        gravityWars.teamTotemHolders.clear();
+        minigame.teamTotemHolders.clear();
         for (int i = 0; i <= 3; i++) {
-            gravityWars.getGreenTotem().get(i).getBlock().setType(Material.AIR);
-            gravityWars.getRedTotem().get(i).getBlock().setType(Material.AIR);
-            gravityWars.getObsidianTotem().get(i).getBlock().setType(Material.AIR);
-            gravityWars.getBlueTotem().get(i).getBlock().setType(Material.AIR);
+            minigame.getGreenTotem().get(i).getBlock().setType(Material.AIR);
+            minigame.getRedTotem().get(i).getBlock().setType(Material.AIR);
+            minigame.getObsidianTotem().get(i).getBlock().setType(Material.AIR);
+            minigame.getBlueTotem().get(i).getBlock().setType(Material.AIR);
         }
 
         for (Player player : Bukkit.getOnlinePlayers()) {
-                DetectArea.removeWoolInArea(player.getWorld(), gravityWars.MapareaEdge, gravityWars.MapareaEdge1);
+                DetectArea.removeWoolInArea(player.getWorld(), minigame.MapareaEdge, minigame.MapareaEdge1);
             }
         }
 
     @Override
     public void onUpdate(int ticks, int stopwatch, AMinigame minigame, boolean isTesting, int minigameSize, float coinMultiplier) {
-        GravityWars gravityWars = (GravityWars) minigame;
+        minigame minigame = (minigame) minigame;
 
         for (Player player : Bukkit.getOnlinePlayers()) {
             if(Teams.INSTANCE.getPlayersName().contains(player.getName())) {
-                player.teleport(gravityWars.getSpawnpoint());
-                player.setBedSpawnLocation(gravityWars.getSpawnpoint(), true);
+                player.teleport(minigame.getSpawnpoint());
+                player.setBedSpawnLocation(minigame.getSpawnpoint(), true);
                 player.setGameMode(GameMode.ADVENTURE);
-                gravityWars.PLAYER_POINTS.put(player.getName(), 0);
-                gravityWars.PLAYER_KILLS.put(player.getName(), 0);
+                minigame.PLAYER_POINTS.put(player.getName(), 0);
+                minigame.PLAYER_KILLS.put(player.getName(), 0);
                 player.sendTitle("§b§lGravity Wars", "", 0, 100, 0);
                 giveBoots(player);
             }
@@ -50,7 +50,7 @@ public class GravityWarsTeleportState extends AStage {
     }
 
     @Override
-    public int stateTime(AMinigame minigame) {
+    public int stageTime(AMinigame minigame) {
         return 0;
     }
 

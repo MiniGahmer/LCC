@@ -5,8 +5,6 @@ import org.bukkit.event.Listener;
 public interface IMinigame {
   IMinigameExplanation getMinigameExplanation(IMinigameExplanation minigameExplanation);
 
-  
-
   void updateScore();
 
   void updateScoreboard(String gameState, int stopwatch);
@@ -32,4 +30,6 @@ public interface IMinigame {
   void setup();
 
   void clear();
+
+  boolean isTesting();
 }

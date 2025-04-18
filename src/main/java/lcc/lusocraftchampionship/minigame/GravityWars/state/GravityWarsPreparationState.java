@@ -1,86 +1,78 @@
 package lcc.lusocraftchampionship.minigame.GravityWars.state;
 
-import lcc.lusocraftchampionship.minigame.GravityWars.GravityWars;
+import lcc.lusocraftchampionship.lcc.player.VirtualPlayer;
 import lcc.lusocraftchampionship.lcc.team.Teams;
 import lcc.lusocraftchampionship.minigame.AMinigame;
 import lcc.lusocraftchampionship.minigame.AStage;
+import lcc.lusocraftchampionship.minigame.GravityWars.GravityWars;
+import lcc.lusocraftchampionship.minigame.GravityWars.GravityWarsStages;
 import lcc.lusocraftchampionship.util.Timer;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 
-public class GravityWarsPreparationState extends AStage {
+public class GravityWarsPreparationState extends AStage<GravityWars, GravityWarsStages> {
 
-    @Override
-    public void onEnable(AMinigame minigame) {
-        GravityWars gravityWars = (GravityWars) minigame;
+  protected GravityWarsPreparationState(GravityWars minigame) {
+    super(minigame);
+    // TODO Auto-generated constructor stub
+  }
 
-        // Loop through each block and set its material
-        for (int i = 0; i < gravityWars.StartingBlocks.length; i++) {
-            gravityWars.StartingBlocks[i].setType(gravityWars.materials[i]);
-        }
-        gravityWars.PLAYER_KILLER.clear();
-        gravityWars.PLAYER_KILLS.clear();
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            if (Teams.INSTANCE.getPlayersName().contains(player.getName())) {
-                    player.setGameMode(GameMode.SURVIVAL);
-                    giveBoots(player);
-                    player.setInvulnerable(true);
-                    player.setExp(0);
-                    player.setLevel(0);
-            }
-        }
+  @Override
+  public void onEnable() {
+    // Loop through each block and set its material
+    for (int i = 0; i < minigame.startingBlocks.length; i++) {
+      minigame.startingBlocks[i].setType(minigame.materials[i]);
     }
 
-    @Override
-    public void onUpdate(int ticks, int stopwatch, AMinigame minigame, boolean isTesting, int minigameSize, float coinMultiplier) {
-        GravityWars gravityWars = (GravityWars) minigame;
+    minigame.PLAYER_KILLER.clear();
+    minigame.PLAYER_KILLS.clear();
 
-        for(Player player : Bukkit.getOnlinePlayers()) {
-            if (player.getGameMode().equals(GameMode.ADVENTURE)) {
-                playerImmune(player);
-            }
-        }
+    for (VirtualPlayer vp : minigame.players) {
+      giveBoots(vp);
+      vp.player.setInvulnerable(true);
+    }
+  }
 
-        if (Timer.isZero(stopwatch)) {
-            for (Player player : Bukkit.getOnlinePlayers()) {
-                if (Teams.INSTANCE.getPlayersName().contains(player.getName())) {
-                    if(gravityWars.getTeam1().contains(Teams.INSTANCE.getPlayerTeam(player))) {
-                        player.teleport(gravityWars.getTeam1Spawn());
-                        player.setBedSpawnLocation(gravityWars.getTeam1Spawn(), true);
-                    }
-
-                    if(gravityWars.getTeam2().contains(Teams.INSTANCE.getPlayerTeam(player))) {
-                        player.teleport(gravityWars.getTeam2Spawn());
-                        player.setBedSpawnLocation(gravityWars.getTeam2Spawn(), true);
-                    }
-
-                    if(gravityWars.getTeam3().contains(Teams.INSTANCE.getPlayerTeam(player))) {
-                        player.teleport(gravityWars.getTeam3Spawn());
-                        player.setBedSpawnLocation(gravityWars.getTeam3Spawn(), true);
-                    }
-
-                    if(gravityWars.getTeam4().contains(Teams.INSTANCE.getPlayerTeam(player))) {
-                        player.teleport(gravityWars.getTeam4Spawn());
-                        player.setBedSpawnLocation(gravityWars.getTeam4Spawn(), true);
-                    }
-                }
-            }
-        }
-
-        countdownTeamPlayer(stopwatch, 5);
-
-        gravityWars.refreshAll(ticks, minigameSize, "§c§lComeça em", stopwatch, coinMultiplier);
+  @Override
+  public void onUpdate(int ticks, int stopwatch) {
+    // TODO Usar listener aqui
+    for (Player player : Bukkit.getOnlinePlayers()) {
+      if (player.getGameMode().equals(GameMode.ADVENTURE)) {
+        playerImmune(player);
+      }
     }
 
-    @Override
-    public void onDisable(AMinigame minigame, boolean isTesting) {
+    countdownTeamPlayer(stopwatch, 5);
+  }
 
+  @Override
+  public void onDisable() {
+    for (VirtualPlayer vp : minigame.players) {
+      if (minigame.getTeam1().contains(Teams.INSTANCE.getPlayerTeam(player))) {
+        player.teleport(minigame.getTeam1Spawn());
+        player.setBedSpawnLocation(minigame.getTeam1Spawn(), true);
+      }
+
+      if (minigame.getTeam2().contains(Teams.INSTANCE.getPlayerTeam(player))) {
+        player.teleport(minigame.getTeam2Spawn());
+        player.setBedSpawnLocation(minigame.getTeam2Spawn(), true);
+      }
+
+      if (minigame.getTeam3().contains(Teams.INSTANCE.getPlayerTeam(player))) {
+        player.teleport(minigame.getTeam3Spawn());
+        player.setBedSpawnLocation(minigame.getTeam3Spawn(), true);
+      }
+
+      if (minigame.getTeam4().contains(Teams.INSTANCE.getPlayerTeam(player))) {
+        player.teleport(minigame.getTeam4Spawn());
+        player.setBedSpawnLocation(minigame.getTeam4Spawn(), true);
+      }
     }
+  }
 
-    @Override
-    public int stateTime(AMinigame minigame) {
-        return Timer.secToTicks(10);
-    }
-
+  @Override
+  public int stageTime() {
+    return Timer.secToTicks(10);
+  }
 }

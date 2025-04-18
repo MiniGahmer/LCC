@@ -1,15 +1,15 @@
 package lcc.lusocraftchampionship.minigame;
 
 public interface IStage {
-    void onEnable();
+  void onEnable();
 
-    void onUpdate(int ticks, int stopwatch);
+  void onUpdate(int ticks, int stopwatch);
 
-    void onDisable();
+  void onDisable();
 
-    int stageTime();
+  int stageTime();
 
-    void jumpToState(Enum<?> state);
+  void jumpToState(Enum<?> state);
 
-    Enum<?> getState();
+  Enum<?> getState();
 }

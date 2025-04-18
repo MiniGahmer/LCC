@@ -54,10 +54,7 @@ public enum Teams {
 
   public void saveData() {
     data.getConfig().getConfigurationSection("Teams.").getKeys(false).forEach(teamName -> {
-      data.getConfig().set("Teams." + teamName + ".points", getPointsTeam(teams.stream()
-          .filter(virtualTeam -> virtualTeam.name.equals(teamName))
-          .findFirst()
-          .orElse(null)));
+      data.getConfig().set("Teams." + teamName + ".points", getTeam(teamName).get().getPoints());
     });
     data.saveConfig();
   }
@@ -231,6 +228,12 @@ public enum Teams {
 
   public Optional<String> getIconPrefix(Optional<VirtualTeam> team) {
     return team.map(virtualTeam -> virtualTeam.prefix + " " + virtualTeam.name);
+  }
+
+  public Optional<VirtualTeam> getTeam(String teamName) {
+    return teams.stream()
+        .filter(virtualTeam -> virtualTeam.name.equalsIgnoreCase(teamName))
+        .findFirst();
   }
 
   public void addPlayerTeam(Player player) {

@@ -4,6 +4,7 @@ import lcc.lusocraftchampionship.lcc.player.VirtualPlayer;
 import lcc.lusocraftchampionship.lcc.team.Teams;
 import lcc.lusocraftchampionship.util.Particles;
 import lcc.lusocraftchampionship.util.Timer;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -14,9 +15,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffect;
-
-import java.util.HashMap;
-import java.util.List;
 
 public abstract class AStage<T extends AMinigame, S extends Enum<S>> implements IStage {
   protected T minigame;
@@ -37,15 +35,21 @@ public abstract class AStage<T extends AMinigame, S extends Enum<S>> implements 
   }
 
   @Override
-  public void onUpdate(int ticks, int stopwatch, boolean isTesting, int minigameSize, float coinMultiplier) {
+  public void onUpdate(int ticks, int stopwatch) {
   }
 
   @Override
-  public void onDisable(boolean isTesting) {
+  public void onDisable() {
   }
 
+  @Override
   public int stageTime() {
     return 0;
+  }
+
+  @Override
+  public Enum<?> getState() {
+    return stage;
   }
 
   // ================
@@ -150,15 +154,15 @@ public abstract class AStage<T extends AMinigame, S extends Enum<S>> implements 
   //   }
   // }
 
-  // public void giveBoots(Player player) {
-  //   ItemStack item = new ItemStack(Material.LEATHER_BOOTS);
-  //   ItemMeta meta = item.hasItemMeta() ? item.getItemMeta() : Bukkit.getItemFactory().getItemMeta(item.getType());
-  //   LeatherArmorMeta leatherArmorMeta = (LeatherArmorMeta) meta;
-  //   leatherArmorMeta.setColor(Teams.INSTANCE.getTeamColor(Teams.INSTANCE.getPlayerTeam(player)));
-  //   item.setItemMeta(leatherArmorMeta);
+  public void giveBoots(VirtualPlayer vp) {
+    ItemStack item = new ItemStack(Material.LEATHER_BOOTS);
+    ItemMeta meta = item.hasItemMeta() ? item.getItemMeta() : Bukkit.getItemFactory().getItemMeta(item.getType());
+    LeatherArmorMeta leatherArmorMeta = (LeatherArmorMeta) meta;
+    leatherArmorMeta.setColor(vp.team.color);
+    item.setItemMeta(leatherArmorMeta);
 
-  //   player.getInventory().setBoots(item);
-  // }
+    vp.player.getInventory().setBoots(item);
+  }
 
   // public void sendTeamStatus(List<String> top, HashMap<String, Integer> stats, String header) {
   //   for (Player player : Bukkit.getOnlinePlayers()) {
@@ -233,6 +237,7 @@ public abstract class AStage<T extends AMinigame, S extends Enum<S>> implements 
     player.setHealth(20);
     player.setFoodLevel(20);
     player.setInvisible(false);
+    
     for (Player player_ : Bukkit.getOnlinePlayers())
       player.showPlayer(plugin, player_);
 

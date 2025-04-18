@@ -8,13 +8,8 @@ import lcc.lusocraftchampionship.lcc.team.Teams;
 import lcc.lusocraftchampionship.lcc.team.VirtualTeam;
 import lcc.lusocraftchampionship.util.Timer;
 import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.potion.PotionEffect;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
@@ -100,7 +95,9 @@ public abstract class AMinigame implements IMinigame {
 
         if (stage.getState() != null) {
           index = getPositionByKey(MINIGAME_STAGES, stage.getState());
+          stopwatch = 0;
           ticks = 0;
+          stage.onDisable();
           stage = createInstance(getSafeCast(MINIGAME_STAGES.values().toArray()[index]));
           stopwatch = stage.stageTime();
           return;
@@ -131,11 +128,11 @@ public abstract class AMinigame implements IMinigame {
       game.cancel();
     }
     
-    if (!isTesting) {
-      for (String team : TEAM_POINTS.keySet()) {
-        Teams.INSTANCE.addPointTeam(team, TEAM_POINTS.get(team));
-      }
-    }
+    // if (!isTesting) {
+    //   for (String team : TEAM_POINTS.keySet()) {
+    //     Teams.INSTANCE.addPointTeam(team, TEAM_POINTS.get(team));
+    //   }
+    // }
     
     clear();
   }
@@ -167,13 +164,11 @@ public abstract class AMinigame implements IMinigame {
     listeners.clear();
   }
 
-
   // TODO: INIT the variables
+  // TODO: Teleport players to the map 
   @Override
   public void setup() {
     players = Teams.INSTANCE.getPlayers();
-
-
 
     LCCUtils.clearPlayers(plugin, players);
 
@@ -199,6 +194,11 @@ public abstract class AMinigame implements IMinigame {
     }
 
     listenersInstances.clear();
+  }
+
+  @Override
+  public boolean isTesting() {
+    return isTesting;
   }
 
   private <K, V> int getPositionByKey(LinkedHashMap<K, V> map, K targetKey) {
