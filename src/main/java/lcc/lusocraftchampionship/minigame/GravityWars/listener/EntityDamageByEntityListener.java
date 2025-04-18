@@ -1,7 +1,8 @@
 package lcc.lusocraftchampionship.minigame.GravityWars.listener;
 
+import lcc.lusocraftchampionship.lcc.team.Teams;
 import lcc.lusocraftchampionship.minigame.GravityWars.GravityWars;
-import lcc.lusocraftchampionship.team.Teams;
+
 import org.bukkit.GameMode;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
@@ -30,7 +31,7 @@ public class EntityDamageByEntityListener implements Listener {
             } else if ((event.getDamager() instanceof Player) && (event.getEntity() instanceof Player)) {
                 if (((Player) event.getEntity()).getGameMode() == GameMode.SURVIVAL ||
                         ((Player) event.getEntity()).getGameMode() == GameMode.ADVENTURE) {
-                    List<String> teamPlayers = Teams.getTeamPlayers(Teams.getPlayerTeam((Player) event.getEntity()));
+                    List<String> teamPlayers = Teams.INSTANCE.getTeamPlayersName(Teams.INSTANCE.getPlayerTeam((Player) event.getEntity()));
                     if (teamPlayers.contains(event.getDamager().getName())) {
                         event.setCancelled(true);
                     }

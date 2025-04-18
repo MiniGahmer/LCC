@@ -1,21 +1,17 @@
 package lcc.lusocraftchampionship.minigame.GravityWars.state;
 
 import lcc.lusocraftchampionship.minigame.GravityWars.GravityWars;
-import lcc.lusocraftchampionship.minigame.Minigame;
-import lcc.lusocraftchampionship.minigame.MinigameStages;
-import lcc.lusocraftchampionship.team.Teams;
-import lcc.lusocraftchampionship.util.BlockHandler;
+import lcc.lusocraftchampionship.lcc.team.Teams;
+import lcc.lusocraftchampionship.minigame.AMinigame;
+import lcc.lusocraftchampionship.minigame.AStage;
 import lcc.lusocraftchampionship.util.DetectArea;
-import lcc.lusocraftchampionship.util.SpawnLocation;
-import lcc.lusocraftchampionship.util.Timer;
 import org.bukkit.*;
-import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
-public class GravityWarsTeleportState extends MinigameStages {
+public class GravityWarsTeleportState extends AStage {
 
     @Override
-    public void onEnable(Minigame minigame) {
+    public void onEnable(AMinigame minigame) {
         GravityWars gravityWars = (GravityWars) minigame;
 
         gravityWars.teamTotemHolders.clear();
@@ -32,11 +28,11 @@ public class GravityWarsTeleportState extends MinigameStages {
         }
 
     @Override
-    public void onUpdate(int ticks, int stopwatch, Minigame minigame, boolean isTesting, int minigameSize, float coinMultiplier) {
+    public void onUpdate(int ticks, int stopwatch, AMinigame minigame, boolean isTesting, int minigameSize, float coinMultiplier) {
         GravityWars gravityWars = (GravityWars) minigame;
 
         for (Player player : Bukkit.getOnlinePlayers()) {
-            if(Teams.getPlayers().contains(player.getName())) {
+            if(Teams.INSTANCE.getPlayersName().contains(player.getName())) {
                 player.teleport(gravityWars.getSpawnpoint());
                 player.setBedSpawnLocation(gravityWars.getSpawnpoint(), true);
                 player.setGameMode(GameMode.ADVENTURE);
@@ -49,12 +45,12 @@ public class GravityWarsTeleportState extends MinigameStages {
     }
 
     @Override
-    public void onDisable(Minigame minigame, boolean isTesting) {
+    public void onDisable(AMinigame minigame, boolean isTesting) {
 
     }
 
     @Override
-    public int stateTime(Minigame minigame) {
+    public int stateTime(AMinigame minigame) {
         return 0;
     }
 

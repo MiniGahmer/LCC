@@ -1,15 +1,12 @@
 package lcc.lusocraftchampionship.minigame.WildWestBounty;
 
-import lcc.lusocraftchampionship.Lusocraftchampionship;
-import lcc.lusocraftchampionship.minigame.GravityWars.GravityWarsExplanation;
+import lcc.lusocraftchampionship.LCCPlugin;
+import lcc.lusocraftchampionship.lcc.team.Teams;
 import lcc.lusocraftchampionship.minigame.GravityWars.GravityWarsStages;
-import lcc.lusocraftchampionship.minigame.GravityWars.command.StartGravityWars;
-import lcc.lusocraftchampionship.minigame.GravityWars.listener.*;
 import lcc.lusocraftchampionship.minigame.GravityWars.state.*;
-import lcc.lusocraftchampionship.minigame.Minigame;
+import lcc.lusocraftchampionship.minigame.AMinigame;
 import lcc.lusocraftchampionship.minigame.WildWestBounty.command.StartWildWestBounty;
 import lcc.lusocraftchampionship.minigame.WildWestBounty.listener.HorseTraderNPC;
-import lcc.lusocraftchampionship.team.Teams;
 import lcc.lusocraftchampionship.util.Timer;
 
 import java.util.ArrayList;
@@ -17,13 +14,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class WildWestBounty extends Minigame {
+public class WildWestBounty extends AMinigame {
 
     public HashMap<String, Integer> PLAYER_KILLS = new HashMap<>();
     public HashMap<String, String> PLAYER_KILLER = new HashMap<>();
     public List<String> TOP_PLAYERS_KILLS = new ArrayList<>();
 
-    public WildWestBounty(Lusocraftchampionship plugin) {
+    public WildWestBounty(LCCPlugin plugin) {
         super(plugin, "wildwestbounty");
 
         addStateHandler(GravityWarsStages.TELEPORT, new GravityWarsTeleportState());
@@ -85,11 +82,11 @@ public class WildWestBounty extends Minigame {
             lines.add(gameState + "§c§l: §r" + Timer.formatMS(stopwatch));
             lines.add("");
             lines.add("§b§lOuro do jogo: §r(§e" + coinMultiplier + "x§r)");
-            lines.add(" 1. " + Teams.getIconPrefix(TOP_TEAMS.get(0)) + TOP_TEAMS.get(0) + "§r > " + TEAM_POINTS.get(TOP_TEAMS.get(0)) + Teams.getScoreboardCoin());
-            lines.add(" 2. " + Teams.getIconPrefix(TOP_TEAMS.get(1)) + TOP_TEAMS.get(1) + "§r > " + TEAM_POINTS.get(TOP_TEAMS.get(1)) + Teams.getScoreboardCoin());
-            lines.add(" 3. " + Teams.getIconPrefix(TOP_TEAMS.get(2)) + TOP_TEAMS.get(2) + "§r > " + TEAM_POINTS.get(TOP_TEAMS.get(2)) + Teams.getScoreboardCoin());
-            lines.add(" 4. " + Teams.getIconPrefix(TOP_TEAMS.get(3)) + TOP_TEAMS.get(3) + "§r > " + TEAM_POINTS.get(TOP_TEAMS.get(3)) + Teams.getScoreboardCoin());
-            lines.add(" 5. " + Teams.getIconPrefix(TOP_TEAMS.get(4)) + TOP_TEAMS.get(4) + "§r > " + TEAM_POINTS.get(TOP_TEAMS.get(4)) + Teams.getScoreboardCoin());
+            lines.add(" 1. " + Teams.INSTANCE.getIconPrefix(TOP_TEAMS.get(0)) + TOP_TEAMS.get(0) + "§r > " + TEAM_POINTS.get(TOP_TEAMS.get(0)) + Teams.INSTANCE.getScoreboardCoin());
+            lines.add(" 2. " + Teams.INSTANCE.getIconPrefix(TOP_TEAMS.get(1)) + TOP_TEAMS.get(1) + "§r > " + TEAM_POINTS.get(TOP_TEAMS.get(1)) + Teams.INSTANCE.getScoreboardCoin());
+            lines.add(" 3. " + Teams.INSTANCE.getIconPrefix(TOP_TEAMS.get(2)) + TOP_TEAMS.get(2) + "§r > " + TEAM_POINTS.get(TOP_TEAMS.get(2)) + Teams.INSTANCE.getScoreboardCoin());
+            lines.add(" 4. " + Teams.INSTANCE.getIconPrefix(TOP_TEAMS.get(3)) + TOP_TEAMS.get(3) + "§r > " + TEAM_POINTS.get(TOP_TEAMS.get(3)) + Teams.INSTANCE.getScoreboardCoin());
+            lines.add(" 5. " + Teams.INSTANCE.getIconPrefix(TOP_TEAMS.get(4)) + TOP_TEAMS.get(4) + "§r > " + TEAM_POINTS.get(TOP_TEAMS.get(4)) + Teams.INSTANCE.getScoreboardCoin());
             lines.add("");
             //PlayerScoreboard.changeAll(lines);
         }

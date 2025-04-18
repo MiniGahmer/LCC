@@ -1,27 +1,27 @@
 package lcc.lusocraftchampionship.minigame.WildWestBounty.state;
 
-import lcc.lusocraftchampionship.minigame.Minigame;
-import lcc.lusocraftchampionship.minigame.MinigameStages;
+import lcc.lusocraftchampionship.minigame.AMinigame;
+import lcc.lusocraftchampionship.minigame.AStage;
 
-public class WildWestBountyIngame extends MinigameStages {
+public class WildWestBountyIngame extends AStage {
 
     @Override
-    public void onEnable(Minigame minigame) {
+    public void onEnable(AMinigame minigame) {
 
     }
 
     @Override
-    public void onUpdate(int ticks, int stopwatch, Minigame minigame, boolean isTesting, int minigameSize, float coinMultiplier) {
+    public void onUpdate(int ticks, int stopwatch, AMinigame minigame, boolean isTesting, int minigameSize, float coinMultiplier) {
 
     }
 
     @Override
-    public void onDisable(Minigame minigame, boolean isTesting) {
+    public void onDisable(AMinigame minigame, boolean isTesting) {
 
     }
 
     @Override
-    public int stateTime(Minigame minigame) {
+    public int stateTime(AMinigame minigame) {
         return 0;
     }
 

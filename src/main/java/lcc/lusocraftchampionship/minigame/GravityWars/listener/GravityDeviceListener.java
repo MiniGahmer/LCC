@@ -1,7 +1,7 @@
 package lcc.lusocraftchampionship.minigame.GravityWars.listener;
 
+import lcc.lusocraftchampionship.lcc.team.Teams;
 import lcc.lusocraftchampionship.minigame.GravityWars.GravityWars;
-import lcc.lusocraftchampionship.team.Teams;
 import lcc.lusocraftchampionship.util.BlockHandler;
 import lcc.lusocraftchampionship.util.Timer;
 import net.minecraft.network.protocol.game.PacketPlayOutEntityTeleport;

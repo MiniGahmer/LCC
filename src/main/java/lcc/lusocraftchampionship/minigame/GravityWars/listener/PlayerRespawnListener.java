@@ -1,7 +1,7 @@
 package lcc.lusocraftchampionship.minigame.GravityWars.listener;
 
+import lcc.lusocraftchampionship.lcc.team.Teams;
 import lcc.lusocraftchampionship.minigame.GravityWars.GravityWars;
-import lcc.lusocraftchampionship.team.Teams;
 import lcc.lusocraftchampionship.util.Particles;
 import net.minecraft.network.protocol.game.PacketPlayInClientCommand;
 import net.minecraft.server.level.EntityPlayer;
@@ -46,10 +46,10 @@ public class PlayerRespawnListener implements Listener {
         event.setCancelled(true);
         simulateDeath(player);
         scheduleRespawn(player);
-        ((Player) event.getEntity()).getKiller().sendTitle("", Teams.getIconPrefix(Teams.getPlayerTeam(event.getDamager().getName())) + event.getDamager().getName() + "§r" + " deu um §l§cL§r no " + Teams.getIconPrefix(Teams.getPlayerTeam(((Player) event.getEntity()).getPlayer())) + event.getEntity().getName(), 0, 60, 0);
-        player.sendTitle("", Teams.getIconPrefix(Teams.getPlayerTeam(event.getDamager().getName())) + event.getDamager().getName() + "§r" + " deu um §l§cL§r no " + Teams.getIconPrefix(Teams.getPlayerTeam(((Player) event.getEntity()).getPlayer())) + event.getEntity().getName(), 0, 60, 0);
+        ((Player) event.getEntity()).getKiller().sendTitle("", Teams.INSTANCE.getIconPrefix(Teams.INSTANCE.getPlayerTeam(event.getDamager().getName())) + event.getDamager().getName() + "§r" + " deu um §l§cL§r no " + Teams.INSTANCE.getIconPrefix(Teams.INSTANCE.getPlayerTeam(((Player) event.getEntity()).getPlayer())) + event.getEntity().getName(), 0, 60, 0);
+        player.sendTitle("", Teams.INSTANCE.getIconPrefix(Teams.INSTANCE.getPlayerTeam(event.getDamager().getName())) + event.getDamager().getName() + "§r" + " deu um §l§cL§r no " + Teams.INSTANCE.getIconPrefix(Teams.INSTANCE.getPlayerTeam(((Player) event.getEntity()).getPlayer())) + event.getEntity().getName(), 0, 60, 0);
         for (Player p : Bukkit.getOnlinePlayers()) {
-            p.sendMessage((Teams.getIconPrefix(Teams.getPlayerTeam(event.getDamager().getName())) + event.getDamager().getName() + "§r" + " deu um §l§cL§r no " + Teams.getIconPrefix(Teams.getPlayerTeam(((Player) event.getEntity()).getPlayer())) + event.getEntity().getName()));
+            p.sendMessage((Teams.INSTANCE.getIconPrefix(Teams.INSTANCE.getPlayerTeam(event.getDamager().getName())) + event.getDamager().getName() + "§r" + " deu um §l§cL§r no " + Teams.INSTANCE.getIconPrefix(Teams.INSTANCE.getPlayerTeam(((Player) event.getEntity()).getPlayer())) + event.getEntity().getName()));
         }
     }
 
@@ -68,7 +68,7 @@ public class PlayerRespawnListener implements Listener {
             simulateDeath(player);
             scheduleRespawn(player);
 //        for (Player p : Bukkit.getOnlinePlayers()) {
-//            p.sendMessage((Objects.requireNonNull(Teams.getIconPrefix(Teams.getPlayerTeam(event.getEntity().getName()) + event.getEntity().getName() + "§r" + " morreu no void"))));
+//            p.sendMessage((Objects.requireNonNull(Teams.INSTANCE.getIconPrefix(Teams.INSTANCE.getPlayerTeam(event.getEntity().getName()) + event.getEntity().getName() + "§r" + " morreu no void"))));
 //        }
         }
     }
@@ -93,13 +93,13 @@ public class PlayerRespawnListener implements Listener {
         simulateDeath(player);
         scheduleRespawn(player);
 //        for (Player p : Bukkit.getOnlinePlayers()) {
-//            p.sendMessage((Objects.requireNonNull(Teams.getIconPrefix(Teams.getPlayerTeam(event.getEntity().getName()) + event.getEntity().getName() + "§r" + " morreu"))));
+//            p.sendMessage((Objects.requireNonNull(Teams.INSTANCE.getIconPrefix(Teams.INSTANCE.getPlayerTeam(event.getEntity().getName()) + event.getEntity().getName() + "§r" + " morreu"))));
 //        }
     }
 
     private void simulateDeath(Player player) {
         Player respawnPlayer = Bukkit.getPlayer(player.getUniqueId());
-        String respawnTeam = Teams.getPlayerTeam(respawnPlayer);
+        String respawnTeam = Teams.INSTANCE.getPlayerTeam(respawnPlayer);
         if (respawnPlayer == null || !respawnPlayer.isOnline()) return; // Ensure player is online
         if (respawnTeam == null) return; // Safety check
 
@@ -123,7 +123,7 @@ public class PlayerRespawnListener implements Listener {
             @Override
             public void run() {
                 Player respawnPlayer = Bukkit.getPlayer(player.getUniqueId());
-                String respawnTeam = Teams.getPlayerTeam(respawnPlayer);
+                String respawnTeam = Teams.INSTANCE.getPlayerTeam(respawnPlayer);
                 if (respawnPlayer == null || !respawnPlayer.isOnline()) return; // Ensure player is online
                 if (respawnTeam == null) return; // Safety check
 

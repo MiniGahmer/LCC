@@ -1,7 +1,7 @@
 package lcc.lusocraftchampionship.minigame.GravityWars.listener;
 
+import lcc.lusocraftchampionship.lcc.team.Teams;
 import lcc.lusocraftchampionship.minigame.GravityWars.GravityWars;
-import lcc.lusocraftchampionship.team.Teams;
 import lcc.lusocraftchampionship.util.BlockHandler;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -33,9 +33,9 @@ public class BlockPlaceListener implements Listener {
         Material clickedBlockMaterial = event.getBlock().getType();
 
         // Get the team of the player
-        String playerTeam = Teams.getPlayerTeam(player); // Implement this method to get the player's team
-        // Load the restricted index for the team from teams.yml
-        int restrictedIndex = Teams.getTotemTeam(playerTeam);
+        String playerTeam = Teams.INSTANCE.getPlayerTeam(player); // Implement this method to get the player's team
+        // Load the restricted index for the team from Teams.INSTANCE.yml
+        int restrictedIndex = Teams.INSTANCE.getTotemTeam(playerTeam);
         // Ensure the player's team exists in the restriction map
         if (restrictedIndex == -1) {
             return; // If the restricted index is not found, do nothing
@@ -108,7 +108,7 @@ public class BlockPlaceListener implements Listener {
                         Location totemLocation = gravityWars.getTotemLocation(clickedBlockMaterial, restrictedIndex);
 
                         if (totemLocation != null && blockLocation.equals(totemLocation)) {
-                            String team = Teams.getPlayerTeam(player);
+                            String team = Teams.INSTANCE.getPlayerTeam(player);
                             if (gravityWars.teamTotemHolders.containsKey(team) && gravityWars.teamTotemHolders.get(team).equals(player)) {
                                 gravityWars.teamTotemHolders.remove(team);
                                 player.sendMessage(ChatColor.GOLD + "Totem Adquirido!");

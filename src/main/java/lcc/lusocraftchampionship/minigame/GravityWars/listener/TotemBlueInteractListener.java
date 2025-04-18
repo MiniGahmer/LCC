@@ -1,7 +1,7 @@
 package lcc.lusocraftchampionship.minigame.GravityWars.listener;
 
+import lcc.lusocraftchampionship.lcc.team.Teams;
 import lcc.lusocraftchampionship.minigame.GravityWars.GravityWars;
-import lcc.lusocraftchampionship.team.Teams;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
@@ -43,15 +43,15 @@ public class TotemBlueInteractListener implements Listener {
         if (event.getClickedBlock() == null) return;
 
         Player player = event.getPlayer();
-        String team = Teams.getPlayerTeam(player);
+        String team = Teams.INSTANCE.getPlayerTeam(player);
         Material clickedBlockMaterial = event.getClickedBlock().getType();
         Location blockLocation = event.getClickedBlock().getLocation();
         Block clickedBlock = event.getClickedBlock();
 
         // Get the team of the player
-        String playerTeam = Teams.getPlayerTeam(player); // Implement this method to get the player's team
-        // Load the restricted index for the team from teams.yml
-        int restrictedIndex = Teams.getTotemTeam(playerTeam);
+        String playerTeam = Teams.INSTANCE.getPlayerTeam(player); // Implement this method to get the player's team
+        // Load the restricted index for the team from Teams.INSTANCE.yml
+        int restrictedIndex = Teams.INSTANCE.getTotemTeam(playerTeam);
         // Ensure the player's team exists in the restriction map
         if (restrictedIndex == -1) {
             return; // If the restricted index is not found, do nothing
@@ -212,7 +212,7 @@ public class TotemBlueInteractListener implements Listener {
     private void givePlayerTotemPiece(Player player) {
         ItemStack totemPiece = new ItemStack(Material.LIGHT_BLUE_GLAZED_TERRACOTTA);
         ItemMeta meta = totemPiece.getItemMeta();
-        String team = Teams.getPlayerTeam(player);
+        String team = Teams.INSTANCE.getPlayerTeam(player);
         if (meta != null) {
             meta.setDisplayName(ChatColor.GOLD + "BLUE TOTEM PIECE");
             totemPiece.setItemMeta(meta);

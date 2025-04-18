@@ -1,7 +1,6 @@
 package lcc.lusocraftchampionship.minigame.WildWestBounty;
 
-import lcc.lusocraftchampionship.minigame.GravityWars.GravityWars;
-import lcc.lusocraftchampionship.minigame.Minigame;
+import lcc.lusocraftchampionship.minigame.AMinigame;
 import lcc.lusocraftchampionship.minigame.MinigameExplanation;
 import lcc.lusocraftchampionship.util.Timer;
 import org.bukkit.Bukkit;
@@ -16,7 +15,7 @@ public class WildWestBountyExplanation extends MinigameExplanation {
     }
 
     @Override
-    public HashMap<Integer, String> addExplanationMessages(Minigame minigame) {
+    public HashMap<Integer, String> addExplanationMessages(AMinigame minigame) {
         HashMap<Integer, String> messages = new HashMap<>();
 
         messages.put(Timer.secToTicks(40),
@@ -67,7 +66,7 @@ public class WildWestBountyExplanation extends MinigameExplanation {
     }
 
     @Override
-    protected HashMap<Integer, Location> addExplanationLocations(Minigame minigame) {
+    protected HashMap<Integer, Location> addExplanationLocations(AMinigame minigame) {
         HashMap<Integer, Location> locations = new HashMap<>();
 
         locations.put(Timer.secToTicks(34), new Location(Bukkit.getWorld("gravitywars"), -1987, 19, -1991, 0, 0));

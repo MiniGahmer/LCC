@@ -1,7 +1,7 @@
 package lcc.lusocraftchampionship.minigame.GravityWars.listener;
 
+import lcc.lusocraftchampionship.lcc.team.Teams;
 import lcc.lusocraftchampionship.minigame.GravityWars.GravityWars;
-import lcc.lusocraftchampionship.team.Teams;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.ChatColor;
@@ -32,14 +32,14 @@ public class TotemObsidianInteractListener implements Listener {
     public void onTotemInteract(BlockBreakEvent event) {
         Player player = event.getPlayer();
         Block block = event.getBlock();
-        String team = Teams.getPlayerTeam(player);
+        String team = Teams.INSTANCE.getPlayerTeam(player);
         Location blockLocation = event.getBlock().getLocation();
         Material brokenBlock = event.getBlock().getType();
 
         // Get the team of the player
-        String playerTeam = Teams.getPlayerTeam(player); // Implement this method to get the player's team
-        // Load the restricted index for the team from teams.yml
-        int restrictedIndex = Teams.getTotemTeam(playerTeam);
+        String playerTeam = Teams.INSTANCE.getPlayerTeam(player); // Implement this method to get the player's team
+        // Load the restricted index for the team from Teams.INSTANCE.yml
+        int restrictedIndex = Teams.INSTANCE.getTotemTeam(playerTeam);
         // Ensure the player's team exists in the restriction map
         if (restrictedIndex == -1) {
             return; // If the restricted index is not found, do nothing
@@ -83,7 +83,7 @@ public class TotemObsidianInteractListener implements Listener {
     }
 
     private void givePlayerTotemPiece(Player player) {
-        String team = Teams.getPlayerTeam(player);
+        String team = Teams.INSTANCE.getPlayerTeam(player);
         ItemStack totemPiece = new ItemStack(Material.CRYING_OBSIDIAN);
         ItemMeta meta = totemPiece.getItemMeta();
         if (meta != null) {

@@ -1,21 +1,18 @@
 package lcc.lusocraftchampionship.minigame.GravityWars.state;
 
 import lcc.lusocraftchampionship.minigame.GravityWars.GravityWars;
-import lcc.lusocraftchampionship.minigame.Minigame;
-import lcc.lusocraftchampionship.minigame.MinigameStages;
-import lcc.lusocraftchampionship.team.Teams;
-import lcc.lusocraftchampionship.util.BlockHandler;
+import lcc.lusocraftchampionship.lcc.team.Teams;
+import lcc.lusocraftchampionship.minigame.AMinigame;
+import lcc.lusocraftchampionship.minigame.AStage;
 import lcc.lusocraftchampionship.util.Timer;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
-import org.bukkit.Material;
-import org.bukkit.Statistic;
 import org.bukkit.entity.Player;
 
-public class GravityWarsPreparationState extends MinigameStages {
+public class GravityWarsPreparationState extends AStage {
 
     @Override
-    public void onEnable(Minigame minigame) {
+    public void onEnable(AMinigame minigame) {
         GravityWars gravityWars = (GravityWars) minigame;
 
         // Loop through each block and set its material
@@ -25,7 +22,7 @@ public class GravityWarsPreparationState extends MinigameStages {
         gravityWars.PLAYER_KILLER.clear();
         gravityWars.PLAYER_KILLS.clear();
         for (Player player : Bukkit.getOnlinePlayers()) {
-            if (Teams.getPlayers().contains(player.getName())) {
+            if (Teams.INSTANCE.getPlayersName().contains(player.getName())) {
                     player.setGameMode(GameMode.SURVIVAL);
                     giveBoots(player);
                     player.setInvulnerable(true);
@@ -36,7 +33,7 @@ public class GravityWarsPreparationState extends MinigameStages {
     }
 
     @Override
-    public void onUpdate(int ticks, int stopwatch, Minigame minigame, boolean isTesting, int minigameSize, float coinMultiplier) {
+    public void onUpdate(int ticks, int stopwatch, AMinigame minigame, boolean isTesting, int minigameSize, float coinMultiplier) {
         GravityWars gravityWars = (GravityWars) minigame;
 
         for(Player player : Bukkit.getOnlinePlayers()) {
@@ -47,23 +44,23 @@ public class GravityWarsPreparationState extends MinigameStages {
 
         if (Timer.isZero(stopwatch)) {
             for (Player player : Bukkit.getOnlinePlayers()) {
-                if (Teams.getPlayers().contains(player.getName())) {
-                    if(gravityWars.getTeam1().contains(Teams.getPlayerTeam(player))) {
+                if (Teams.INSTANCE.getPlayersName().contains(player.getName())) {
+                    if(gravityWars.getTeam1().contains(Teams.INSTANCE.getPlayerTeam(player))) {
                         player.teleport(gravityWars.getTeam1Spawn());
                         player.setBedSpawnLocation(gravityWars.getTeam1Spawn(), true);
                     }
 
-                    if(gravityWars.getTeam2().contains(Teams.getPlayerTeam(player))) {
+                    if(gravityWars.getTeam2().contains(Teams.INSTANCE.getPlayerTeam(player))) {
                         player.teleport(gravityWars.getTeam2Spawn());
                         player.setBedSpawnLocation(gravityWars.getTeam2Spawn(), true);
                     }
 
-                    if(gravityWars.getTeam3().contains(Teams.getPlayerTeam(player))) {
+                    if(gravityWars.getTeam3().contains(Teams.INSTANCE.getPlayerTeam(player))) {
                         player.teleport(gravityWars.getTeam3Spawn());
                         player.setBedSpawnLocation(gravityWars.getTeam3Spawn(), true);
                     }
 
-                    if(gravityWars.getTeam4().contains(Teams.getPlayerTeam(player))) {
+                    if(gravityWars.getTeam4().contains(Teams.INSTANCE.getPlayerTeam(player))) {
                         player.teleport(gravityWars.getTeam4Spawn());
                         player.setBedSpawnLocation(gravityWars.getTeam4Spawn(), true);
                     }
@@ -77,12 +74,12 @@ public class GravityWarsPreparationState extends MinigameStages {
     }
 
     @Override
-    public void onDisable(Minigame minigame, boolean isTesting) {
+    public void onDisable(AMinigame minigame, boolean isTesting) {
 
     }
 
     @Override
-    public int stateTime(Minigame minigame) {
+    public int stateTime(AMinigame minigame) {
         return Timer.secToTicks(10);
     }
 

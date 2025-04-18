@@ -1,6 +1,6 @@
 package lcc.lusocraftchampionship.file;
 
-import lcc.lusocraftchampionship.Lusocraftchampionship;
+import lcc.lusocraftchampionship.LCCPlugin;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -11,53 +11,58 @@ import java.io.InputStreamReader;
 import java.util.logging.Level;
 
 public class DataManager {
-    private Lusocraftchampionship plugin;
-    private FileConfiguration dataConfig = null;
-    private File configFile = null;
-    private String fileName = null;
+  private LCCPlugin plugin;
+  private FileConfiguration dataConfig = null;
+  private File configFile = null;
+  private final String fileName;
 
-    public DataManager(Lusocraftchampionship plugin, String fileName) {
-        this.plugin = plugin;
-        this.fileName = fileName;
-        saveDefaultConfig();
+  public DataManager(LCCPlugin plugin, String fileName) {
+    this.plugin = plugin;
+    this.fileName = fileName;
+    saveDefaultConfig();
+  }
+
+  public void reloadConfig() {
+    if (this.configFile == null)
+      this.configFile = new File(this.plugin.getDataFolder(), fileName + ".yml");
+
+    this.dataConfig = YamlConfiguration.loadConfiguration(this.configFile);
+
+    InputStream defaultStream = this.plugin.getResource(fileName + ".yml");
+    if (defaultStream != null) {
+      YamlConfiguration defaultConfig = YamlConfiguration.loadConfiguration(new InputStreamReader(defaultStream));
+      this.dataConfig.setDefaults(defaultConfig);
     }
+  }
 
-    public void reloadConfig() {
-        if(this.configFile == null)
-            this.configFile = new File(this.plugin.getDataFolder(), fileName + ".yml");
+  public FileConfiguration getConfig() {
+    if (this.dataConfig == null)
+      reloadConfig();
 
-        this.dataConfig = YamlConfiguration.loadConfiguration(this.configFile);
+    return this.dataConfig;
+  }
 
-        InputStream defaultStream = this.plugin.getResource(fileName + ".yml");
-        if(defaultStream != null) {
-            YamlConfiguration defaultConfig = YamlConfiguration.loadConfiguration(new InputStreamReader(defaultStream));
-            this.dataConfig.setDefaults(defaultConfig);
-        }
+  public void saveConfig() {
+    if (this.dataConfig == null || this.configFile == null)
+      return;
+
+    try {
+      this.getConfig().save(this.configFile);
+    } catch (IOException e) {
+      plugin.getLogger().log(Level.SEVERE, "Could not save config to " + this.configFile, e);
     }
+  }
 
-    public FileConfiguration getConfig() {
-        if(this.dataConfig == null)
-            reloadConfig();
+  public void saveDefaultConfig() {
+    if (this.configFile == null)
+      this.configFile = new File(this.plugin.getDataFolder(), fileName + ".yml");
 
-        return this.dataConfig;
+    if (!this.configFile.exists()) {
+      this.plugin.saveResource(fileName + ".yml", false);
     }
+  }
 
-    public void saveConfig() {
-        if(this.dataConfig == null || this.configFile == null) return;
-
-        try {
-            this.getConfig().save(this.configFile);
-        } catch (IOException e) {
-            plugin.getLogger().log(Level.SEVERE, "Could not save config to " + this.configFile, e);
-        }
-    }
-
-    public void saveDefaultConfig() {
-        if (this.configFile == null)
-            this.configFile = new File(this.plugin.getDataFolder(), fileName + ".yml");
-
-        if(!this.configFile.exists()) {
-            this.plugin.saveResource(fileName + ".yml", false);
-        }
-    }
+  public final String getFileName() {
+    return fileName;
+  }
 }

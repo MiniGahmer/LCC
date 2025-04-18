@@ -1,6 +1,6 @@
 package lcc.lusocraftchampionship.util;
 
-import lcc.lusocraftchampionship.Lusocraftchampionship;
+import lcc.lusocraftchampionship.LCCPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.FireworkEffect;
 import org.bukkit.Location;
@@ -13,7 +13,7 @@ import java.lang.reflect.Method;
 
 public class InstantFirework {
 
-    private Lusocraftchampionship plugin;
+    private LCCPlugin plugin;
 
     /*
      * InstantFirework class made by TehHypnoz.
@@ -30,7 +30,7 @@ public class InstantFirework {
      */
 
 
-    public InstantFirework(FireworkEffect fe, Location loc, Lusocraftchampionship plugin) {
+    public InstantFirework(FireworkEffect fe, Location loc, LCCPlugin plugin) {
         this.plugin = plugin;
         Firework f = (Firework) loc.getWorld().spawn(loc, Firework.class);
         FireworkMeta fm = f.getFireworkMeta();

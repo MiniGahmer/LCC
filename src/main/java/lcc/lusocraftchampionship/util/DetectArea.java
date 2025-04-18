@@ -1,7 +1,6 @@
 package lcc.lusocraftchampionship.util;
 
-import lcc.lusocraftchampionship.Lusocraftchampionship;
-import lcc.lusocraftchampionship.team.Teams;
+import lcc.lusocraftchampionship.LCCPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -52,7 +51,7 @@ public class DetectArea {
         float minY, maxY;
         int lengthX = 0, lengthY = 0, lengthZ = 0;
         if(!edge1.getWorld().equals(edge1.getWorld())) {
-            Lusocraftchampionship.LOGGER.log(Level.INFO, "The worlds of " + edge + " and " + edge1 + "aren't the same!");
+            LCCPlugin.LOGGER.log(Level.INFO, "The worlds of " + edge + " and " + edge1 + "aren't the same!");
             return false;
         }
         if(edge.getX() <= edge1.getX()) {

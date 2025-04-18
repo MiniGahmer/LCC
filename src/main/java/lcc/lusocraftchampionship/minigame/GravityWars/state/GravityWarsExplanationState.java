@@ -1,24 +1,18 @@
 package lcc.lusocraftchampionship.minigame.GravityWars.state;
 
 import lcc.lusocraftchampionship.minigame.GravityWars.GravityWars;
-import lcc.lusocraftchampionship.minigame.Minigame;
-import lcc.lusocraftchampionship.minigame.MinigameStages;
-import lcc.lusocraftchampionship.util.SpawnLocation;
-import lcc.lusocraftchampionship.util.Timer;
-import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.entity.Player;
+import lcc.lusocraftchampionship.minigame.AMinigame;
+import lcc.lusocraftchampionship.minigame.AStage;
 
-public class GravityWarsExplanationState extends MinigameStages {
+public class GravityWarsExplanationState extends AStage {
 
     @Override
-    public void onEnable(Minigame minigame) {
+    public void onEnable(AMinigame minigame) {
 
     }
 
     @Override
-    public void onUpdate(int ticks, int stopwatch, Minigame minigame, boolean isTesting, int minigameSize, float coinMultiplier) {
+    public void onUpdate(int ticks, int stopwatch, AMinigame minigame, boolean isTesting, int minigameSize, float coinMultiplier) {
         GravityWars gravityWars = (GravityWars) minigame;
 
         goNextState();
@@ -33,7 +27,7 @@ public class GravityWarsExplanationState extends MinigameStages {
     }
 
     @Override
-    public void onDisable(Minigame minigame, boolean isTesting) {
+    public void onDisable(AMinigame minigame, boolean isTesting) {
         GravityWars gravityWars = (GravityWars) minigame;
 
         //Location downedge = gravityWars.getParkourSpawn("downedge");
@@ -50,7 +44,7 @@ public class GravityWarsExplanationState extends MinigameStages {
     }
 
     @Override
-    public int stateTime(Minigame minigame) {
+    public int stateTime(AMinigame minigame) {
         return 0;
     }
 

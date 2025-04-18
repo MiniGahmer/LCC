@@ -109,13 +109,13 @@
     </repositories>
 
     <dependencies>
-        <dependency>
+        <!-- <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot</artifactId>
             <version>${remapped.version}</version>
             <scope>provided</scope>
             <classifier>remapped-mojang</classifier>
-        </dependency>
+        </dependency> -->
         <dependency>
             <groupId>com.comphenix.protocol</groupId>
             <artifactId>ProtocolLib</artifactId>

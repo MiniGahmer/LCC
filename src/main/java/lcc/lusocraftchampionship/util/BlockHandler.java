@@ -1,6 +1,6 @@
 package lcc.lusocraftchampionship.util;
 
-import lcc.lusocraftchampionship.Lusocraftchampionship;
+import lcc.lusocraftchampionship.LCCPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -14,7 +14,7 @@ public class BlockHandler {
         float minY, maxY;
         int lengthX, lengthY , lengthZ;
         if(!edge1.getWorld().equals(edge1.getWorld())) {
-            Lusocraftchampionship.LOGGER.log(Level.INFO, "The worlds of " + edge + " and " + edge1 + "aren't the same!");
+            LCCPlugin.LOGGER.log(Level.INFO, "The worlds of " + edge + " and " + edge1 + "aren't the same!");
             return;
         }
         if(edge.getX() <= edge1.getX()) {
@@ -65,7 +65,7 @@ public class BlockHandler {
         float minY, maxY;
         int lengthX, lengthY , lengthZ;
         if(!edge1.getWorld().equals(edge1.getWorld())) {
-            Lusocraftchampionship.LOGGER.log(Level.INFO, "The worlds of " + edge + " and " + edge1 + "aren't the same!");
+            LCCPlugin.LOGGER.log(Level.INFO, "The worlds of " + edge + " and " + edge1 + "aren't the same!");
             return;
         }
         if(edge.getX() <= edge1.getX()) {
@@ -115,7 +115,7 @@ public class BlockHandler {
         float minY, maxY;
         int lengthX, lengthY , lengthZ;
         if(!edge1.getWorld().equals(edge1.getWorld())) {
-            Lusocraftchampionship.LOGGER.log(Level.INFO, "The worlds of " + edge + " and " + edge1 + "aren't the same!");
+            LCCPlugin.LOGGER.log(Level.INFO, "The worlds of " + edge + " and " + edge1 + "aren't the same!");
             return false;
         }
         if(edge.getX() <= edge1.getX()) {

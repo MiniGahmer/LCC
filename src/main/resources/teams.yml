@@ -1,5 +1,5 @@
 team_max_players: 4
-teams:
+Teams.INSTANCE:
   Blaze:
     players:
       - Min1Gahmer
