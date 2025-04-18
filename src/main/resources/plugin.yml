@@ -1,6 +1,6 @@
-name: LCC
+name: LCCPlugin
 version: ${project.version}
-main: lcc.lusocraftchampionship.Lusocraftchampionship
+main: lcc.lusocraftchampionship.Lusocraftchampionship.LCCPlugin
 authors: [ Smili, MiniGahmer ]
 description: LCC Plugin
 depend: [ ProtocolLib ]

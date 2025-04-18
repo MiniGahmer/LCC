@@ -7,7 +7,7 @@ import lcc.lusocraftchampionship.lcc.command.ReloadLCC;
 import lcc.lusocraftchampionship.lcc.player.listener.PlayerListener;
 import lcc.lusocraftchampionship.lcc.team.Teams;
 import lcc.lusocraftchampionship.lcc.team.listener.TeamListener;
-import lcc.lusocraftchampionship.manager.Manager;
+import lcc.lusocraftchampionship.minigame.MGTest.command.CommandMGTest;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -20,14 +20,9 @@ public class LCCPlugin extends JavaPlugin {
 
   public ProtocolManager protocolManager;
 
-  public Manager manager;
-
   @Override
   public void onEnable() {
     protocolManager = ProtocolLibrary.getProtocolManager();
-
-    manager = new Manager(this);
-    manager.register();
 
     // LCC
     this.getServer().getPluginManager().registerEvents(new PlayerListener(), this);
@@ -35,9 +30,10 @@ public class LCCPlugin extends JavaPlugin {
     Teams.INSTANCE.reload();
 
     this.getCommand("reloadlcc").setExecutor(new ReloadLCC());
+    this.getCommand("mgtest").setExecutor(new CommandMGTest());
     // -----
 
-    manager.sendPlayerToLobby();
+    // manager.sendPlayerToLobby();
 
     LOGGER.log(Level.INFO, "[LCC]: " + "\u001B[34m" + "=============================" + "\u001B[0m");
     LOGGER.log(Level.INFO, "[LCC]: " + "\u001B[34m" + "   LCC STARTED WITH SUCESS   " + "\u001B[0m");
