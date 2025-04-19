@@ -1,5 +1,6 @@
 package lcc.lusocraftchampionship.minigame.FlagsOfWar;
 
+import lcc.lusocraftchampionship.LCCPlugin;
 import lcc.lusocraftchampionship.minigame.AMinigame;
 import lcc.lusocraftchampionship.minigame.FlagsOfWar.state.FlagsOfWarEndState;
 import lcc.lusocraftchampionship.minigame.FlagsOfWar.state.FlagsOfWarExplanationState;
@@ -13,11 +14,18 @@ import lcc.lusocraftchampionship.minigame.GravityWars.state.GravityWarsExplanati
 import lcc.lusocraftchampionship.minigame.GravityWars.state.GravityWarsInGameState;
 import lcc.lusocraftchampionship.minigame.GravityWars.state.GravityWarsPreparationState;
 import lcc.lusocraftchampionship.minigame.IMinigameExplanation;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.World;
+import org.bukkit.scoreboard.Team;
+
+import java.util.Map;
+import java.util.Set;
 
 public class FlagsOfWar extends AMinigame {
 
-    public FlagsOfWar(boolean isTesting) {
-        super("flagsofwar", isTesting);
+    public FlagsOfWar(String data, boolean isTesting) {
+        super(data, isTesting);
 
         addState(FlagsOfWarsStages.EXPLANATION, FlagsOfWarExplanationState.class);
         addState(FlagsOfWarsStages.PREPARATION, FlagsOfWarPreparationState.class);
@@ -46,8 +54,33 @@ public class FlagsOfWar extends AMinigame {
         return new FlagsOfWarExplanation(this);
     }
 
+
     @Override
     public String getWorldName() {
         return data.getConfig().getString("spawnpoint.world");
+    }
+
+    public Map<String, Location> getTeamSpawns() {
+        return Map.of(
+                getTeam(1), getTeamSpawn(1),
+                getTeam(2), getTeamSpawn(2),
+                getTeam(3), getTeamSpawn(3),
+                getTeam(4), getTeamSpawn(4)
+        );
+    }
+
+    public String getTeam(int number) {
+        LCCPlugin.LOGGER.info(data.getConfig().getString("team" + number));
+        return data.getConfig().getString("team" + number);
+    }
+
+    public Location getTeamSpawn(int number) {
+        String path = "teamspawn." + number;
+        World world = Bukkit.getWorld(data.getConfig().getString(path + ".world"));
+        double x = data.getConfig().getDouble(path + ".x");
+        double y = data.getConfig().getDouble(path + ".y");
+        double z = data.getConfig().getDouble(path + ".z");
+
+        return new Location(world, x, y, z);
     }
 }

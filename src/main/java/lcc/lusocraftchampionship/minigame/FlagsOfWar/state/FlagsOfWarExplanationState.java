@@ -4,16 +4,18 @@ import lcc.lusocraftchampionship.minigame.AStage;
 import lcc.lusocraftchampionship.minigame.FlagsOfWar.FlagsOfWar;
 import lcc.lusocraftchampionship.minigame.FlagsOfWar.FlagsOfWarsStages;
 import lcc.lusocraftchampionship.util.Timer;
+import org.bukkit.Bukkit;
 
 public class FlagsOfWarExplanationState extends AStage<FlagsOfWar, FlagsOfWarsStages> {
 
-    protected FlagsOfWarExplanationState(FlagsOfWar minigame) {
+    public FlagsOfWarExplanationState(FlagsOfWar minigame) {
         super(minigame);
     }
 
     @Override
     public void onEnable() {
-
+        Bukkit.broadcastMessage("EXPLANATION");
+        jumpToState(FlagsOfWarsStages.PREPARATION);
     }
 
     @Override
@@ -28,6 +30,6 @@ public class FlagsOfWarExplanationState extends AStage<FlagsOfWar, FlagsOfWarsSt
 
     @Override
     public int stageTime() {
-        return Timer.secToTicks(10);
+        return Timer.secToTicks(30);
     }
 }
