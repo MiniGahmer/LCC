@@ -1,9 +1,9 @@
-package lcc.lusocraftchampionship.minigame.MGTest.stages;
+package lcc.lusocraftchampionship.lcc.minigames.MGTest.stages;
 
 import lcc.lusocraftchampionship.lcc.player.VirtualPlayer;
 import lcc.lusocraftchampionship.minigame.AStage;
-import lcc.lusocraftchampionship.minigame.MGTest.MGStages;
-import lcc.lusocraftchampionship.minigame.MGTest.MGTest;
+import lcc.lusocraftchampionship.lcc.minigames.MGTest.MGStages;
+import lcc.lusocraftchampionship.lcc.minigames.MGTest.MGTest;
 import org.bukkit.Bukkit;
 
 public class MGTestBegin extends AStage<MGTest, MGStages> {

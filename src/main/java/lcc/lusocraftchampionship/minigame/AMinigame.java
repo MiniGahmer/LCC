@@ -6,14 +6,18 @@ import lcc.lusocraftchampionship.lcc.LCCUtils;
 import lcc.lusocraftchampionship.lcc.player.VirtualPlayer;
 import lcc.lusocraftchampionship.lcc.team.Teams;
 import lcc.lusocraftchampionship.lcc.team.VirtualTeam;
+import lcc.lusocraftchampionship.minigame.stats.IMinigameStat;
 import lcc.lusocraftchampionship.util.Timer;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
 import java.util.*;
+import java.util.logging.Level;
 
 public abstract class AMinigame implements IMinigame {
   public LCCPlugin plugin;
@@ -22,15 +26,13 @@ public abstract class AMinigame implements IMinigame {
   public BukkitTask game;
 
   // This variables have to be cleaned when the game is finished
-  public List<VirtualPlayer> players = new ArrayList<>();
-  public List<VirtualPlayer> INGAME_PLAYERS = new ArrayList<>();
-  public HashMap<VirtualPlayer, Integer> PLAYER_POINTS = new HashMap<>();
-  public HashMap<VirtualTeam, Integer> TEAM_POINTS = new HashMap<>();
-  public List<VirtualTeam> TOP_TEAMS = new ArrayList<>();
-  public List<VirtualTeam> TOP_PLAYERS = new ArrayList<>();
+  public List<MinigamePlayer> players = new ArrayList<>();
+  public List<VirtualTeam> topTeams = new ArrayList<>();
   // ------------------------------------------------
 
   private boolean isTesting = false;
+
+  private final Set<Class<? extends IMinigameStat<?>>> statClasses = new HashSet<>();
 
   private final List<Class<? extends Listener>> listeners = new ArrayList<>();
   private final List<Listener> listenersInstances = new ArrayList<>();
@@ -41,16 +43,10 @@ public abstract class AMinigame implements IMinigame {
 
   public AMinigame(String data, boolean isTesting) {
     this.plugin = LCCPlugin.getPlugin(LCCPlugin.class);
-    this.data = new DataManager(plugin, data);
+    this.data = new DataManager(data);
     this.isTesting = isTesting;
   }
 
-  // public void explanation(int stopwatch) {
-  //   minigameExplanation.playerLocations(stopwatch);
-  //   minigameExplanation.playerMessages(stopwatch);
-  // }
-
-  // New functions
   @Override
   public void updateScore() {
   }
@@ -68,7 +64,16 @@ public abstract class AMinigame implements IMinigame {
   }
 
   @Override
-  public void start() {    
+  public void reload() {
+    data = new DataManager(data.getFileName());
+  }
+
+  //////// Runnable //////////
+
+  // TODO: Verify if all the players are online before starting
+  @Override
+  public void start() {
+
     setup();
 
     game = new BukkitRunnable() {
@@ -127,25 +132,94 @@ public abstract class AMinigame implements IMinigame {
     if (game != null) {
       game.cancel();
     }
-    
+
     // if (!isTesting) {
-    //   for (String team : TEAM_POINTS.keySet()) {
-    //     Teams.INSTANCE.addPointTeam(team, TEAM_POINTS.get(team));
-    //   }
+    // for (String team : TEAM_POINTS.keySet()) {
+    // Teams.INSTANCE.addPointTeam(team, TEAM_POINTS.get(team));
     // }
-    
+    // }
+
     clear();
   }
 
   @Override
-  public void reload() {
-    data = new DataManager(plugin, data.getFileName());
+  public void setup() {
+    List<VirtualPlayer> vps = Teams.INSTANCE.getPlayers();
+
+    for (VirtualPlayer vp : vps) {
+      MinigamePlayer player = new MinigamePlayer(vp.player, vp.team);
+
+      for (Class<? extends IMinigameStat<?>> statClass : statClasses) {
+        try {
+          IMinigameStat<?> statInstance;
+          
+          try {
+            statInstance = statClass.getDeclaredConstructor(this.getClass()).newInstance(this);
+          } catch (NoSuchMethodException e) {
+            statInstance = statClass.getDeclaredConstructor().newInstance();
+          }
+
+          player.addStat(statInstance);
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+      }
+
+      players.add(player);
+
+    }
+
+    LCCUtils.clearPlayers(vps);
+
+    World world = Bukkit.getWorld(getWorldName());
+
+    if (world != null) {
+      LCCUtils.teleportPlayers(vps, new Location(Bukkit.getWorld(getWorldName()), 0, 255, 0));
+    } else {
+      LCCPlugin.LOGGER.log(Level.SEVERE, "World not found: " + getWorldName());
+    }
+
+    for (Class<? extends Listener> listener : listeners) {
+      try {
+        Listener instance = listener.getDeclaredConstructor().newInstance();
+        listenersInstances.add(instance);
+        Bukkit.getPluginManager().registerEvents(instance, plugin);
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    }
   }
+
+  @Override
+  public void clear() {
+    List<VirtualPlayer> vps = Teams.INSTANCE.getPlayers();
+
+    LCCUtils.clearPlayers(vps);
+    LCCUtils.backToLobby(vps);
+
+    for (Listener listener : listenersInstances) {
+      HandlerList.unregisterAll(listener);
+    }
+
+    listenersInstances.clear();
+
+    players.clear();
+    topTeams.clear();
+  }
+
+  @Override
+  public boolean isTesting() {
+    return isTesting;
+  }
+
+  //////// States //////////
 
   @Override
   public void addState(Enum<?> a, Class<? extends IStage> b) {
     MINIGAME_STAGES.put(a, b);
   }
+
+  //////// Listeners //////////
 
   @Override
   public void addClassListener(Class<? extends Listener> listener) {
@@ -164,42 +238,26 @@ public abstract class AMinigame implements IMinigame {
     listeners.clear();
   }
 
-  // TODO: INIT the variables
-  // TODO: Teleport players to the map 
+  //////// Stats //////////
+
   @Override
-  public void setup() {
-    players = Teams.INSTANCE.getPlayers();
-
-    LCCUtils.clearPlayers(plugin, players);
-
-    for (Class<? extends Listener> listener : listeners) {
-      try {
-        Listener instance = listener.getDeclaredConstructor().newInstance();
-        listenersInstances.add(instance);
-        Bukkit.getPluginManager().registerEvents(instance, plugin);
-      } catch (Exception e) {
-        e.printStackTrace();
-      }
+  public void addStatClass(Class<? extends IMinigameStat<?>> statClass) {
+    if (!statClasses.contains(statClass)) {
+      statClasses.add(statClass);
     }
   }
 
-  // TODO: CLEAR ALL THE LISTS AND HASHMAPS
   @Override
-  public void clear() {
-    LCCUtils.clearPlayers(plugin, players);
-    LCCUtils.backToLobby(plugin, players);
-
-    for (Listener listener : listenersInstances) {
-      HandlerList.unregisterAll(listener);
-    }
-
-    listenersInstances.clear();
+  public void removeStatClass(Class<? extends IMinigameStat<?>> statClass) {
+    statClasses.remove(statClass);
   }
 
   @Override
-  public boolean isTesting() {
-    return isTesting;
+  public void removeAllStatClasses() {
+    statClasses.clear();
   }
+
+  //////// Private Functions //////////
 
   private <K, V> int getPositionByKey(LinkedHashMap<K, V> map, K targetKey) {
     int position = 0;

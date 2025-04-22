@@ -1,8 +1,8 @@
-package lcc.lusocraftchampionship.minigame.GravityWars.listener;
+package lcc.lusocraftchampionship.lcc.minigames.GravityWars.listener;
 /*
-package lcc.lusocraftchampionship.minigame.GravityWars.listener;
+package lcc.lusocraftchampionship.lcc.minigames.GravityWars.listener;
 
-import lcc.lusocraftchampionship.minigame.GravityWars.GravityWars;
+import lcc.lusocraftchampionship.lcc.minigames.GravityWars.GravityWars;
 import lcc.lusocraftchampionship.util.BlockHandler;
 import lcc.lusocraftchampionship.util.DetectArea;
 import org.bukkit.Bukkit;

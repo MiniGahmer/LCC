@@ -1,11 +1,11 @@
-package lcc.lusocraftchampionship.minigame.GravityWars.listener;
+package lcc.lusocraftchampionship.lcc.minigames.GravityWars.listener;
 /*
-package lcc.lusocraftchampionship.minigame.GravityWars.listener;
+package lcc.lusocraftchampionship.lcc.minigames.GravityWars.listener;
 
 import com.comphenix.protocol.wrappers.Pair;
 
 import lcc.lusocraftchampionship.lcc.team.Teams;
-import lcc.lusocraftchampionship.minigame.GravityWars.GravityWars;
+import lcc.lusocraftchampionship.lcc.minigames.GravityWars.GravityWars;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.minecraft.network.chat.IChatBaseComponent;

@@ -41,7 +41,7 @@
                         </goals>
                         <configuration>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
-                            <outputFile>E:\Old shit\Minecraft\MAPATESTES\plugins\lusocraftchampionship.jar</outputFile>
+                            <outputFile>C:\Users\ntsm7\Documents\MAPATESTES\plugins\lusocraftchampionship.jar</outputFile>
                         </configuration>
                     </execution>
                 </executions>
@@ -110,12 +110,24 @@
 
     <dependencies>
         <!-- <dependency>
+          <groupId>sqlite</groupId>
+          <artifactId>sqlite</artifactId>
+          <version>1.0</version>
+          <scope>system</scope>
+          <systemPath>${project.basedir}/lib/SQLiteLib.jar</systemPath>
+        </dependency>  -->
+        <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot</artifactId>
             <version>${remapped.version}</version>
             <scope>provided</scope>
             <classifier>remapped-mojang</classifier>
-        </dependency> -->
+        </dependency>
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <version>9.2.0</version>
+        </dependency>
         <dependency>
             <groupId>com.comphenix.protocol</groupId>
             <artifactId>ProtocolLib</artifactId>
@@ -132,6 +144,72 @@
             <artifactId>authlib</artifactId>
             <version>1.5.21</version>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+          <groupId>net.megavex</groupId>
+          <artifactId>scoreboard-library-api</artifactId>
+          <version>2.3.0</version>
+        </dependency>
+        <dependency>
+          <groupId>net.megavex</groupId>
+          <artifactId>scoreboard-library-implementation</artifactId>
+          <version>2.3.0</version>
+          <scope>runtime</scope>
+        </dependency>
+        <!-- Kotlin specific extensions (optional) -->
+        <dependency>
+          <groupId>net.megavex</groupId>
+          <artifactId>scoreboard-library-extra-kotlin</artifactId>
+          <version>2.3.0</version>
+        </dependency>
+
+        <!-- Add packet adapter implementations you want: -->
+        <dependency>
+          <groupId>net.megavex</groupId>
+          <artifactId>scoreboard-library-modern</artifactId>
+          <version>2.3.0</version>
+          <scope>runtime</scope>
+          <!-- For a Mojang mapped variant, uncomment line below (only use if you know what you're doing!): -->
+          <!-- <classifier>mojmap</classifier> -->
+        </dependency>
+        <dependency>
+          <groupId>net.megavex</groupId>
+          <artifactId>scoreboard-library-packetevents</artifactId>
+          <version>2.3.0</version>
+          <scope>runtime</scope>
+        </dependency>
+        <dependency>
+          <groupId>net.megavex</groupId>
+          <artifactId>scoreboard-library-legacy</artifactId>
+          <version>2.3.0</version>
+          <scope>runtime</scope>
+        </dependency>
+
+        <!--
+          If using the PacketEvents implementation, scoreboard-library expects PacketEvents to be in the classpath.
+          Follow either of:
+          - https://github.com/retrooper/packetevents/wiki/Depending-on-pre-built-PacketEvents
+          - https://github.com/retrooper/packetevents/wiki/Shading-PacketEvents
+          Example how to load PacketEvents in your plugin:
+          https://github.com/retrooper/packetevents-example/blob/24f0c842d47362aef122b794dea29b8fee113fa3/thread-safe-listener/src/main/java/main/Main.java 
+          -->
+
+        <!-- If targeting a Minecraft version without native Adventure support, add it as well: -->
+        <dependency>
+          <groupId>net.kyori</groupId>
+          <artifactId>adventure-platform-bukkit</artifactId>
+          <version>4.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>net.kyori</groupId>
+            <artifactId>adventure-api</artifactId>
+            <version>4.20.0</version>
+        </dependency>
+        <dependency>
+            <groupId>net.kyori</groupId>
+            <artifactId>adventure-text-minimessage</artifactId>
+            <version>4.20.0</version>
         </dependency>
     </dependencies>
 </project>

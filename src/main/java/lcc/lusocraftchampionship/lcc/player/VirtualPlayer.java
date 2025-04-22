@@ -4,46 +4,27 @@ import org.bukkit.entity.Player;
 
 import lcc.lusocraftchampionship.lcc.team.VirtualTeam;
 
-public class VirtualPlayer {
-  // private String name;
+public class VirtualPlayer implements IVirtualPlayer {
   public final Player player;
   public final VirtualTeam team;
-  private int score;
-  private int kills;
-  private int deaths;
 
   public VirtualPlayer(Player player, VirtualTeam team) {
     this.player = player;
     this.team = team;
   }
 
-  public void addScore(int score) {
-    if (score > 0) {
-      this.score += score;
-    }
+  @Override
+  public String toString() {
+    return "VirtualPlayer{" +
+        "player=" + player.getName() +
+        ", team=" + team.name +
+        '}';
   }
 
-  public void addKill(int kills) {
-    if (kills > 0) {
-      this.kills += kills;
-    }
-  }
-
-  public void addDeath(int deaths) {
-    if (deaths > 0) {
-      this.deaths += deaths;
-    }
-  }
-
-  public int getScore() {
-    return score;
-  }
-
-  public int getKills() {
-    return kills;
-  }
-
-  public int getDeaths() {
-    return deaths;
+  @Override
+  public int hashCode() {
+    int result = player != null ? player.getName().hashCode() : 0;
+    result = 31 * result + (team != null ? team.name.hashCode() : 0);
+    return result;
   }
 }

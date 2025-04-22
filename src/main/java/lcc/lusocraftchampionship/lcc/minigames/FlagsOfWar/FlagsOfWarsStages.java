@@ -1,4 +1,4 @@
-package lcc.lusocraftchampionship.minigame.FlagsOfWar;
+package lcc.lusocraftchampionship.lcc.minigames.FlagsOfWar;
 
 public enum FlagsOfWarsStages {
     EXPLANATION,

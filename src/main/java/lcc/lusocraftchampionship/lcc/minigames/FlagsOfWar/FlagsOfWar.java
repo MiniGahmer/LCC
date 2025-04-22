@@ -1,26 +1,17 @@
-package lcc.lusocraftchampionship.minigame.FlagsOfWar;
+package lcc.lusocraftchampionship.lcc.minigames.FlagsOfWar;
 
 import lcc.lusocraftchampionship.LCCPlugin;
 import lcc.lusocraftchampionship.minigame.AMinigame;
-import lcc.lusocraftchampionship.minigame.FlagsOfWar.state.FlagsOfWarEndState;
-import lcc.lusocraftchampionship.minigame.FlagsOfWar.state.FlagsOfWarExplanationState;
-import lcc.lusocraftchampionship.minigame.FlagsOfWar.state.FlagsOfWarInGameState;
-import lcc.lusocraftchampionship.minigame.FlagsOfWar.state.FlagsOfWarPreparationState;
-import lcc.lusocraftchampionship.minigame.GravityWars.GravityWarsExplanation;
-import lcc.lusocraftchampionship.minigame.GravityWars.GravityWarsStages;
-import lcc.lusocraftchampionship.minigame.GravityWars.listener.*;
-import lcc.lusocraftchampionship.minigame.GravityWars.state.GravityWarsEndState;
-import lcc.lusocraftchampionship.minigame.GravityWars.state.GravityWarsExplanationState;
-import lcc.lusocraftchampionship.minigame.GravityWars.state.GravityWarsInGameState;
-import lcc.lusocraftchampionship.minigame.GravityWars.state.GravityWarsPreparationState;
+import lcc.lusocraftchampionship.lcc.minigames.FlagsOfWar.state.FlagsOfWarEndState;
+import lcc.lusocraftchampionship.lcc.minigames.FlagsOfWar.state.FlagsOfWarExplanationState;
+import lcc.lusocraftchampionship.lcc.minigames.FlagsOfWar.state.FlagsOfWarInGameState;
+import lcc.lusocraftchampionship.lcc.minigames.FlagsOfWar.state.FlagsOfWarPreparationState;
 import lcc.lusocraftchampionship.minigame.IMinigameExplanation;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.scoreboard.Team;
 
 import java.util.Map;
-import java.util.Set;
 
 public class FlagsOfWar extends AMinigame {
 

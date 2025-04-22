@@ -1,4 +1,4 @@
-package lcc.lusocraftchampionship.minigame.GravityWars;
+package lcc.lusocraftchampionship.lcc.minigames.GravityWars;
 
 import lcc.lusocraftchampionship.minigame.IMinigame;
 import lcc.lusocraftchampionship.minigame.AMinigameExplanation;

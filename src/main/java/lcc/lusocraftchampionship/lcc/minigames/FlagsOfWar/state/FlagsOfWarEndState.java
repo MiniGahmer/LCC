@@ -1,8 +1,8 @@
-package lcc.lusocraftchampionship.minigame.FlagsOfWar.state;
+package lcc.lusocraftchampionship.lcc.minigames.FlagsOfWar.state;
 
 import lcc.lusocraftchampionship.minigame.AStage;
-import lcc.lusocraftchampionship.minigame.FlagsOfWar.FlagsOfWar;
-import lcc.lusocraftchampionship.minigame.FlagsOfWar.FlagsOfWarsStages;
+import lcc.lusocraftchampionship.lcc.minigames.FlagsOfWar.FlagsOfWar;
+import lcc.lusocraftchampionship.lcc.minigames.FlagsOfWar.FlagsOfWarsStages;
 import lcc.lusocraftchampionship.util.Timer;
 
 public class FlagsOfWarEndState extends AStage<FlagsOfWar, FlagsOfWarsStages> {

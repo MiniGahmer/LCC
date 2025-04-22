@@ -1,5 +1,6 @@
 package lcc.lusocraftchampionship.lcc.player.listener;
 
+import lcc.lusocraftchampionship.lcc.LCCUtils;
 import lcc.lusocraftchampionship.lcc.team.Teams;
 import lcc.lusocraftchampionship.lcc.team.VirtualTeam;
 
@@ -7,6 +8,7 @@ import java.util.Optional;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -24,10 +26,10 @@ public class PlayerListener implements Listener {
     } else {
       Optional<VirtualTeam> vt = Teams.INSTANCE.getPlayerTeam(player);
       if (vt.isPresent()) {
-        event.setFormat("§r" + Teams.INSTANCE.getPlayerNameFormat(vt.get(), player) + player.getName()
+        event.setFormat("§r" + Teams.INSTANCE.getPlayerNameFormat(vt.get(), player)
             + " > §r" + msg);
       } else {
-        event.setFormat("§r" + "NO TEAM" + player.getName() + " > §r" + msg);
+        event.setFormat("§r" + "NO TEAM " + player.getName() + " > §r" + msg);
 
       }
     }
@@ -39,19 +41,18 @@ public class PlayerListener implements Listener {
     Player player = event.getPlayer();
 
     if (player.isOp()) {
-      player.setPlayerListName("ꀎ §c" + player.getName());
       event.setJoinMessage("§r ꀎ §c" + player.getName() + " §rentrou no server");
     } else {
       Optional<VirtualTeam> vt = Teams.INSTANCE.getPlayerTeam(player);
       if (vt.isPresent()) {
-        player.setPlayerListName(Teams.INSTANCE.getPlayerNameFormat(vt.get(), player) + player.getName());
-        event.setJoinMessage("§r" + Teams.INSTANCE.getPlayerNameFormat(vt.get(), player) + player.getName()
+        event.setJoinMessage("§r" + Teams.INSTANCE.getPlayerNameFormat(vt.get(), player)
             + " §rentrou no server");
       } else {
-        player.setPlayerListName("NO TEAM" + player.getName());
-        event.setJoinMessage("§r" + "NO TEAM" + player.getName() + " §rentrou no server");
+        event.setJoinMessage("§r" + "NO TEAM " + player.getName() + " §rentrou no server");
       }
     }
+
+    LCCUtils.givePlayerCostum(player);
   }
 
   @EventHandler
@@ -63,8 +64,7 @@ public class PlayerListener implements Listener {
     } else {
       Optional<VirtualTeam> vt = Teams.INSTANCE.getPlayerTeam(player);
       if (vt.isPresent()) {
-        event.setQuitMessage("§r" + Teams.INSTANCE.getPlayerNameFormat(vt.get(), player) + " "
-            + player.getName() + " §rsaiu do server");
+        event.setQuitMessage("§r" + Teams.INSTANCE.getPlayerNameFormat(vt.get(), player) + " §rsaiu do server");
       } else {
         event.setQuitMessage("§r" + "NO TEAM" + " " + player.getName() + " §rsaiu do server");
       }

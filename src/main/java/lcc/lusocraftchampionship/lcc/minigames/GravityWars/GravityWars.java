@@ -1,9 +1,9 @@
-package lcc.lusocraftchampionship.minigame.GravityWars;
+package lcc.lusocraftchampionship.lcc.minigames.GravityWars;
 
 import lcc.lusocraftchampionship.lcc.player.VirtualPlayer;
 import lcc.lusocraftchampionship.lcc.team.Teams;
-import lcc.lusocraftchampionship.minigame.GravityWars.listener.*;
-import lcc.lusocraftchampionship.minigame.GravityWars.state.*;
+import lcc.lusocraftchampionship.lcc.minigames.GravityWars.listener.*;
+import lcc.lusocraftchampionship.lcc.minigames.GravityWars.state.*;
 import lcc.lusocraftchampionship.minigame.stats.KillStats;
 import lcc.lusocraftchampionship.minigame.AMinigame;
 import lcc.lusocraftchampionship.minigame.IMinigameExplanation;
@@ -77,7 +77,7 @@ public class GravityWars extends AMinigame {
     addState(GravityWarsStages.INGAME, GravityWarsInGameState.class);
     addState(GravityWarsStages.END, GravityWarsEndState.class);
 
-    addStatsTracker(new KillStats());
+    addStatClass(KillStats.class);
     
     // addClassListener(BlockBreakListener.class);
     // addClassListener(BlockBreakListener.class);

@@ -1,4 +1,4 @@
-package lcc.lusocraftchampionship.minigame.GravityWars;
+package lcc.lusocraftchampionship.lcc.minigames.GravityWars;
 
 public enum GravityWarsStages {
     TELEPORT,

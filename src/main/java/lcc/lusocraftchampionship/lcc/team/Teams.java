@@ -4,6 +4,7 @@ import lcc.lusocraftchampionship.LCCPlugin;
 import lcc.lusocraftchampionship.file.DataManager;
 import lcc.lusocraftchampionship.lcc.player.VirtualPlayer;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
@@ -19,14 +20,14 @@ public enum Teams {
   private LCCPlugin plugin;
   private DataManager data;
   private int maxPlayers;
-  private final List<VirtualTeam> teams = new ArrayList<>();
+  private List<VirtualTeam> teams = new ArrayList<>();
 
-  private Teams() {
+  Teams() {
     plugin = LCCPlugin.getPlugin(LCCPlugin.class);
   }
 
   public void reload() {
-    data = new DataManager(plugin, "teams");
+    data = new DataManager("teams");
     getData();
   }
 
@@ -251,7 +252,7 @@ public enum Teams {
   public String getPlayerNameFormat(VirtualTeam team, Player player) {
     StringBuilder sb = new StringBuilder();
 
-    sb.append(team.prefix).append(" ").append(team.name).append(player.getName());
+    sb.append(team.icon).append(" ").append(player.getName());
 
     return sb.toString();
   }
@@ -260,5 +261,24 @@ public enum Teams {
     return teams.stream()
         .filter(vT -> vT.equals(virtualTeam))
         .findFirst();
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder("Teams{");
+    for (VirtualTeam team : teams) {
+      sb.append("teamName='").append(team.name).append('\'');
+      sb.append(", players=").append(team.playersName);
+      sb.append(", icon='").append(team.icon).append('\'');
+      sb.append(", prefix='").append(team.prefix).append('\'');
+      sb.append(", color=").append(team.color);
+      sb.append(", points=").append(team.getPoints());
+      sb.append(", totem=").append(team.totem);
+      sb.append(", wool=").append(team.wool);
+      sb.append(", chatColor=").append(team.chatColor).append('\n');
+    }
+
+    sb.append('}');
+    return sb.toString();
   }
 }

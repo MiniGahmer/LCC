@@ -1,11 +1,11 @@
-package lcc.lusocraftchampionship.minigame.GravityWars.state;
+package lcc.lusocraftchampionship.lcc.minigames.GravityWars.state;
 
 import lcc.lusocraftchampionship.lcc.player.VirtualPlayer;
 import lcc.lusocraftchampionship.lcc.team.Teams;
 import lcc.lusocraftchampionship.minigame.AMinigame;
 import lcc.lusocraftchampionship.minigame.AStage;
-import lcc.lusocraftchampionship.minigame.GravityWars.GravityWars;
-import lcc.lusocraftchampionship.minigame.GravityWars.GravityWarsStages;
+import lcc.lusocraftchampionship.lcc.minigames.GravityWars.GravityWars;
+import lcc.lusocraftchampionship.lcc.minigames.GravityWars.GravityWarsStages;
 import lcc.lusocraftchampionship.util.Timer;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;

@@ -1,9 +1,9 @@
-package lcc.lusocraftchampionship.minigame.GravityWars.listener;
+package lcc.lusocraftchampionship.lcc.minigames.GravityWars.listener;
 /*
-package lcc.lusocraftchampionship.minigame.GravityWars.listener;
+package lcc.lusocraftchampionship.lcc.minigames.GravityWars.listener;
 
 import lcc.lusocraftchampionship.lcc.team.Teams;
-import lcc.lusocraftchampionship.minigame.GravityWars.GravityWars;
+import lcc.lusocraftchampionship.lcc.minigames.GravityWars.GravityWars;
 
 import org.bukkit.GameMode;
 import org.bukkit.entity.Firework;

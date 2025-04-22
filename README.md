@@ -31,6 +31,5 @@ Fim do Jogo:
 -nao podem meter lã no totem
 
 Cenas do Smili:
-Os jogadores não devem sempre ser chamados pelo seu nome, mas deve haver uma lista de Players
-Os states não devem ser criados no construtor mas sim referenciados!
-Deviamos criar um VirtualPlayer para que assim os players podem estar relacionados com stats, uma equipa, sem ter a necessidade de fazer pesquisas.
+- Criar um sistema para a base de dados
+- Tratar de um sistema para scoreboard

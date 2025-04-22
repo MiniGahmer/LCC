@@ -1,4 +1,4 @@
-package lcc.lusocraftchampionship.minigame.MGTest.listener;
+package lcc.lusocraftchampionship.lcc.minigames.MGTest.listener;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

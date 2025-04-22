@@ -1,16 +1,11 @@
-package lcc.lusocraftchampionship.minigame.FlagsOfWar.state;
+package lcc.lusocraftchampionship.lcc.minigames.FlagsOfWar.state;
 
 import lcc.lusocraftchampionship.LCCPlugin;
 import lcc.lusocraftchampionship.lcc.player.VirtualPlayer;
-import lcc.lusocraftchampionship.lcc.team.Teams;
 import lcc.lusocraftchampionship.minigame.AStage;
-import lcc.lusocraftchampionship.minigame.FlagsOfWar.FlagsOfWar;
-import lcc.lusocraftchampionship.minigame.FlagsOfWar.FlagsOfWarsStages;
-import lcc.lusocraftchampionship.minigame.GravityWars.GravityWars;
-import lcc.lusocraftchampionship.minigame.GravityWars.GravityWarsStages;
+import lcc.lusocraftchampionship.lcc.minigames.FlagsOfWar.FlagsOfWar;
+import lcc.lusocraftchampionship.lcc.minigames.FlagsOfWar.FlagsOfWarsStages;
 import lcc.lusocraftchampionship.util.Timer;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
 
 public class FlagsOfWarPreparationState extends AStage<FlagsOfWar, FlagsOfWarsStages> {
 

@@ -9,11 +9,11 @@ import lcc.lusocraftchampionship.lcc.team.Teams;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class MinigameExplanation implements IMinigameExplanation {
+public abstract class AMinigameExplanation implements IMinigameExplanation {
   private HashMap<Integer, String> messages = new HashMap<>();
   private HashMap<Integer, Location> locations = new HashMap<>();
 
-  protected MinigameExplanation(IMinigame minigame) {
+  protected AMinigameExplanation(IMinigame minigame) {
     locations = addExplanationLocations(minigame);
     messages = addExplanationMessages(minigame);
   }

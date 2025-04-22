@@ -1,8 +1,9 @@
 team_max_players: 4
-Teams.INSTANCE:
+teams:
   Blaze:
     players:
       - Min1Gahmer
+      - Smili_
     icon: 'Ⓒ'
     prefix: 'Ⓔ§6 '
     color: ORANGE

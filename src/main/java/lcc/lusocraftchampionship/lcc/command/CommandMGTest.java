@@ -1,18 +1,19 @@
-package lcc.lusocraftchampionship.minigame.MGTest.command;
+package lcc.lusocraftchampionship.lcc.command;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-import lcc.lusocraftchampionship.minigame.MGTest.MGTest;
+import lcc.lusocraftchampionship.lcc.LCC;
+import lcc.lusocraftchampionship.lcc.LCCMinigames;
+import lcc.lusocraftchampionship.lcc.LCCPropreties;
 
 public class CommandMGTest implements CommandExecutor {
   @Override
   public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-    if (sender.hasPermission("lcc.mgtest")) {
+    if (sender.hasPermission("lcc." + LCCPropreties.COMMAND_START_MGTEST.getValue())) {
       if (args.length == 0) {
-        MGTest mgTest = new MGTest("mgtest", true);
-        mgTest.start();
+        LCC.INSTANCE.startMinigame(LCCMinigames.MGTEST, "mgtest", true);
         return true;
       } else {
         sender.sendMessage("§cInvalid arguments! Use /mgtest for help.");

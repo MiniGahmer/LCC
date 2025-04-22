@@ -16,8 +16,8 @@ public class DataManager {
   private File configFile = null;
   private final String fileName;
 
-  public DataManager(LCCPlugin plugin, String fileName) {
-    this.plugin = plugin;
+  public DataManager(String fileName) {
+    this.plugin = LCCPlugin.getPlugin();
     this.fileName = fileName;
     saveDefaultConfig();
   }

@@ -1,4 +1,4 @@
-package lcc.lusocraftchampionship.minigame.MGTest;
+package lcc.lusocraftchampionship.lcc.minigames.MGTest;
 
 public enum MGStages {
   BEGIN,

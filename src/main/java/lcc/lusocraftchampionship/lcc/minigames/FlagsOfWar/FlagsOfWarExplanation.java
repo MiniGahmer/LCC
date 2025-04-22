@@ -1,4 +1,4 @@
-package lcc.lusocraftchampionship.minigame.FlagsOfWar;
+package lcc.lusocraftchampionship.lcc.minigames.FlagsOfWar;
 
 import java.util.HashMap;
 

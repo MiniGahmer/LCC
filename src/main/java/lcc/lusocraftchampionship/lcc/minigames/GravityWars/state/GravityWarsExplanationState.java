@@ -1,8 +1,8 @@
-package lcc.lusocraftchampionship.minigame.GravityWars.state;
+package lcc.lusocraftchampionship.lcc.minigames.GravityWars.state;
 
 import lcc.lusocraftchampionship.minigame.AStage;
-import lcc.lusocraftchampionship.minigame.GravityWars.GravityWars;
-import lcc.lusocraftchampionship.minigame.GravityWars.GravityWarsStages;
+import lcc.lusocraftchampionship.lcc.minigames.GravityWars.GravityWars;
+import lcc.lusocraftchampionship.lcc.minigames.GravityWars.GravityWarsStages;
 
 public class GravityWarsExplanationState extends AStage<GravityWars, GravityWarsStages> {
     public GravityWarsExplanationState(GravityWars minigame) {

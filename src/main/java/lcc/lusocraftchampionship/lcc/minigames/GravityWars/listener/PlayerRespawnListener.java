@@ -1,9 +1,9 @@
-package lcc.lusocraftchampionship.minigame.GravityWars.listener;
+package lcc.lusocraftchampionship.lcc.minigames.GravityWars.listener;
 /*
-package lcc.lusocraftchampionship.minigame.GravityWars.listener;
+package lcc.lusocraftchampionship.lcc.minigames.GravityWars.listener;
 
 import lcc.lusocraftchampionship.lcc.team.Teams;
-import lcc.lusocraftchampionship.minigame.GravityWars.GravityWars;
+import lcc.lusocraftchampionship.lcc.minigames.GravityWars.GravityWars;
 import lcc.lusocraftchampionship.util.Particles;
 import net.minecraft.network.protocol.game.PacketPlayInClientCommand;
 import net.minecraft.server.level.EntityPlayer;
