@@ -1,3 +1,4 @@
+package lcc.lusocraftchampionship.minigame.GravityWars.listener;
 /*
 package lcc.lusocraftchampionship.minigame.GravityWars.listener;
 

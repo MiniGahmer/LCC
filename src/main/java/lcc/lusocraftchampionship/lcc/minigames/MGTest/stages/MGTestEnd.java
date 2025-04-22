@@ -23,7 +23,7 @@ public class MGTestEnd extends AStage<MGTest, MGStages> {
   @Override
   public void onUpdate(int ticks, int stopwatch) {
     Bukkit.broadcastMessage("Update End");
-    jumpToState(MGStages.BEGIN);
+    // jumpToState(MGStages.BEGIN);
 
     for (VirtualPlayer vp : minigame.players) {
       vp.player.sendMessage("Update End");

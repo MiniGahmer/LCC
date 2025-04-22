@@ -1,14 +1,14 @@
 package lcc.lusocraftchampionship.minigame.GravityWars;
 
 import lcc.lusocraftchampionship.minigame.IMinigame;
-import lcc.lusocraftchampionship.minigame.MinigameExplanation;
+import lcc.lusocraftchampionship.minigame.AMinigameExplanation;
 import lcc.lusocraftchampionship.util.Timer;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 
 import java.util.HashMap;
 
-public class GravityWarsExplanation extends MinigameExplanation {
+public class GravityWarsExplanation extends AMinigameExplanation {
   public GravityWarsExplanation(IMinigame minigame) {
     super(minigame);
   }

@@ -4,6 +4,7 @@ import lcc.lusocraftchampionship.lcc.player.VirtualPlayer;
 import lcc.lusocraftchampionship.lcc.team.Teams;
 import lcc.lusocraftchampionship.minigame.GravityWars.listener.*;
 import lcc.lusocraftchampionship.minigame.GravityWars.state.*;
+import lcc.lusocraftchampionship.minigame.stats.KillStats;
 import lcc.lusocraftchampionship.minigame.AMinigame;
 import lcc.lusocraftchampionship.minigame.IMinigameExplanation;
 import lcc.lusocraftchampionship.util.Timer;
@@ -76,18 +77,20 @@ public class GravityWars extends AMinigame {
     addState(GravityWarsStages.INGAME, GravityWarsInGameState.class);
     addState(GravityWarsStages.END, GravityWarsEndState.class);
 
-//    addClassListener(BlockBreakListener.class);
-//    addClassListener(BlockBreakListener.class);
-//    addClassListener(BlockPlaceListener.class);
-//    addClassListener(PlayerRespawnListener.class);
-//    addClassListener(EntityDamageByEntityListener.class);
-//    addClassListener(GravityTunnelsListener.class);
-//    addClassListener(GravityDeviceListener.class);
-//    addClassListener(TotemRedInteractListener.class);
-//    addClassListener(TotemBlueInteractListener.class);
-//    addClassListener(TotemGreenInteractListener.class);
-//    addClassListener(TotemObsidianInteractListener.class);
-//    addClassListener(PlayerInventoryClickListener.class);
+    addStatsTracker(new KillStats());
+    
+    // addClassListener(BlockBreakListener.class);
+    // addClassListener(BlockBreakListener.class);
+    // addClassListener(BlockPlaceListener.class);
+    // addClassListener(PlayerRespawnListener.class);
+    // addClassListener(EntityDamageByEntityListener.class);
+    // addClassListener(GravityTunnelsListener.class);
+    // addClassListener(GravityDeviceListener.class);
+    // addClassListener(TotemRedInteractListener.class);
+    // addClassListener(TotemBlueInteractListener.class);
+    // addClassListener(TotemGreenInteractListener.class);
+    // addClassListener(TotemObsidianInteractListener.class);
+    // addClassListener(PlayerInventoryClickListener.class);
 
     // setMinigameExplanation(new GravityWarsExplanation(this));
     // registerCommand("startgravitywars", new StartGravityWars(this));
