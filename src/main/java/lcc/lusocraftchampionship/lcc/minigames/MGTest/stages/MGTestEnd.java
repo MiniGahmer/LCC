@@ -27,8 +27,9 @@ public class MGTestEnd extends AStage<MGTest, MGStages> {
     Bukkit.broadcastMessage("Update End");
     // jumpToState(MGStages.BEGIN);
 
-    for (MinigamePlayer vp : minigame.players) {
-      vp.player.sendMessage("Update End");
+    for (MinigamePlayer mp : minigame.players) {
+      mp.setStatValue(KillStats.class, 10);
+      Bukkit.broadcastMessage("Kills " + mp.getStat(KillStats.class));
     }
   }
 
