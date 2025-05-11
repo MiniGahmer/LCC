@@ -6,7 +6,7 @@ public enum LCCPropreties {
   COMMAND_START_PARKOURWARRIORS("startparkourwarriors"),
   COMMAND_START_GRAVITYWARS("startgravitywars"),
   COMMAND_START_MGTEST("startmgtest");
-
+  
   private final String value;
 
   LCCPropreties(String value) {

@@ -9,6 +9,8 @@ public interface IStage {
 
   int stageTime();
 
+  
+
   void jumpToState(Enum<?> state);
 
   Enum<?> getState();

@@ -12,8 +12,7 @@ import org.bukkit.scheduler.BukkitTask;
 
 public enum LCCSidebar {
   INSTANCE;
-
-  private HashMap<VirtualPlayer, Sidebar> playerSidebar = new HashMap<>();
+  
   private Sidebar sidebar;
   private ExampleComponentSidebar exampleComponentSidebar;
 
@@ -30,5 +29,9 @@ public enum LCCSidebar {
 
   public void addPlayer(Player player) {
     sidebar.addPlayer(player);
-  } 
+  }
+
+  public void removePlayer(Player player) {
+    sidebar.removePlayer(player);
+  }
 }

@@ -2,7 +2,6 @@ package lcc.lusocraftchampionship.minigame;
 
 import org.bukkit.event.Listener;
 
-import lcc.lusocraftchampionship.lcc.player.VirtualPlayer;
 import lcc.lusocraftchampionship.minigame.stats.IMinigameStat;
 
 public interface IMinigame {
@@ -26,9 +25,13 @@ public interface IMinigame {
 
   void addClassListener(Class<? extends Listener> listener);
 
-  void removeClassListener(Class<? extends Listener> listener);
+  void registerListener(Class<? extends Listener> listener);
 
-  void removeAllClassListeners();
+  void unregisterListener(Class<? extends Listener> listener);
+
+  void registerAllListeners();
+
+  void unregisterAllListeners();
 
   void setup();
 

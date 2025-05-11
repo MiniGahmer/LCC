@@ -10,6 +10,8 @@ import lcc.lusocraftchampionship.lcc.command.CommandFlagsOfWar;
 import lcc.lusocraftchampionship.lcc.command.CommandMGTest;
 import lcc.lusocraftchampionship.lcc.command.ReloadLCC;
 import lcc.lusocraftchampionship.lcc.player.listener.PlayerListener;
+import lcc.lusocraftchampionship.lcc.sidebar.SideBarListener;
+import lcc.lusocraftchampionship.lcc.sidebar.LCCSidebar;
 import lcc.lusocraftchampionship.lcc.team.Teams;
 import lcc.lusocraftchampionship.lcc.team.listener.TeamListener;
 import lcc.lusocraftchampionship.minigame.IMinigame;
@@ -30,13 +32,16 @@ public enum LCC {
     addClass(LCCMinigames.MGTEST, lcc.lusocraftchampionship.lcc.minigames.MGTest.MGTest.class);
 
     plugin.getServer().getPluginManager().registerEvents(new TeamListener(), plugin);
+    plugin.getServer().getPluginManager().registerEvents(new PlayerListener(), plugin);
+    plugin.getServer().getPluginManager().registerEvents(new SideBarListener(), plugin);
+
+    Teams.INSTANCE.reload();
 
     Bukkit.getOnlinePlayers().forEach(player -> {
       Teams.INSTANCE.addPlayerTeam(player);
+      LCCSidebar.INSTANCE.addPlayer(player);
+      LCCUtils.givePlayerCostum(player);
     });
-
-    plugin.getServer().getPluginManager().registerEvents(new PlayerListener(), plugin);
-    Teams.INSTANCE.reload();
 
     plugin.getCommand(LCCPropreties.COMMAND_RELOAD_LCC.getValue()).setExecutor(new ReloadLCC());
     plugin.getCommand(LCCPropreties.COMMAND_START_MGTEST.getValue()).setExecutor(new CommandMGTest());

@@ -34,8 +34,7 @@ public abstract class AMinigame implements IMinigame {
 
   private final Set<Class<? extends IMinigameStat<?>>> statClasses = new HashSet<>();
 
-  private final List<Class<? extends Listener>> listeners = new ArrayList<>();
-  private final List<Listener> listenersInstances = new ArrayList<>();
+  private final Map<Class<? extends Listener>, Listener> listeners = new HashMap<>();
 
   private final LinkedHashMap<Enum<?>, Class<? extends IStage>> MINIGAME_STAGES = new LinkedHashMap<>();
 
@@ -146,13 +145,17 @@ public abstract class AMinigame implements IMinigame {
   public void setup() {
     List<VirtualPlayer> vps = Teams.INSTANCE.getPlayers();
 
+    // Clear players
+    LCCUtils.clearPlayers(vps);
+
+    // Create player stats
     for (VirtualPlayer vp : vps) {
       MinigamePlayer player = new MinigamePlayer(vp.player, vp.team);
 
       for (Class<? extends IMinigameStat<?>> statClass : statClasses) {
         try {
           IMinigameStat<?> statInstance;
-          
+
           try {
             statInstance = statClass.getDeclaredConstructor(this.getClass()).newInstance(this);
           } catch (NoSuchMethodException e) {
@@ -166,11 +169,9 @@ public abstract class AMinigame implements IMinigame {
       }
 
       players.add(player);
-
     }
 
-    LCCUtils.clearPlayers(vps);
-
+    // Get the world and teleport all players
     World world = Bukkit.getWorld(getWorldName());
 
     if (world != null) {
@@ -179,29 +180,44 @@ public abstract class AMinigame implements IMinigame {
       LCCPlugin.LOGGER.log(Level.SEVERE, "World not found: " + getWorldName());
     }
 
-    for (Class<? extends Listener> listener : listeners) {
-      try {
-        Listener instance = listener.getDeclaredConstructor().newInstance();
-        listenersInstances.add(instance);
-        Bukkit.getPluginManager().registerEvents(instance, plugin);
-      } catch (Exception e) {
-        e.printStackTrace();
-      }
-    }
+    // Get listeners
+    // for (Class<? extends Listener> listener : listeners) {
+    // try {
+    // Listener instance;
+
+    // try {
+    // instance =
+    // listener.getDeclaredConstructor(this.getClass()).newInstance(this);
+    // } catch (NoSuchMethodException e) {
+    // instance = listener.getDeclaredConstructor().newInstance();
+    // }
+
+    // listenersInstances.add(instance);
+
+    // // Listeners should not be register
+    // // Bukkit.getPluginManager().registerEvents(instance, plugin);
+    // } catch (Exception e) {
+    // e.printStackTrace();
+    // }
+    // }
   }
 
   @Override
   public void clear() {
     List<VirtualPlayer> vps = Teams.INSTANCE.getPlayers();
 
+    // Clear players and send them back to lobby
     LCCUtils.clearPlayers(vps);
     LCCUtils.backToLobby(vps);
 
-    for (Listener listener : listenersInstances) {
-      HandlerList.unregisterAll(listener);
-    }
+    
+    // for (Listener listener : listenersInstances) {
+    //   HandlerList.unregisterAll(listener);
+    // }
 
-    listenersInstances.clear();
+    // listenersInstances.clear();
+
+    unregisterAllListeners();
 
     players.clear();
     topTeams.clear();
@@ -223,19 +239,61 @@ public abstract class AMinigame implements IMinigame {
 
   @Override
   public void addClassListener(Class<? extends Listener> listener) {
-    if (!listeners.contains(listener)) {
-      listeners.add(listener);
+    if (!listeners.containsKey(listener)) {
+      try {
+        Listener instance;
+
+        try {
+          instance = listener.getDeclaredConstructor(this.getClass()).newInstance(this);
+        } catch (NoSuchMethodException e) {
+          instance = listener.getDeclaredConstructor().newInstance();
+        }
+
+        listeners.put(listener, instance);
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    }
+  }
+  
+  @Override
+  public void registerListener(Class<? extends Listener> listener) {
+    Listener l = listeners.get(listener);
+
+    if (l != null) {
+      Bukkit.getPluginManager().registerEvents(l, plugin);
+
+      return;
+    }
+
+    LCCPlugin.LOGGER.log(Level.SEVERE, "Trying to register a null listener of class: " + listener);
+  }
+
+  @Override
+  public void unregisterListener(Class<? extends Listener> listener) {
+    Listener l = listeners.get(listener);
+
+    if (l != null) {
+      HandlerList.unregisterAll(l);
+
+      return;
+    }
+
+    LCCPlugin.LOGGER.log(Level.SEVERE, "Trying to unregister a null listener of class: " + listener);
+  }
+
+  @Override
+  public void registerAllListeners() {
+    for (Class<? extends Listener> lc : listeners.keySet()) {
+      registerListener(lc);
     }
   }
 
   @Override
-  public void removeClassListener(Class<? extends Listener> listener) {
-    listeners.remove(listener);
-  }
-
-  @Override
-  public void removeAllClassListeners() {
-    listeners.clear();
+  public void unregisterAllListeners() {
+    for (Class<? extends Listener> lc : listeners.keySet()) {
+      unregisterListener(lc);
+    }
   }
 
   //////// Stats //////////
